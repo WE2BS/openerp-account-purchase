@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Category: Création d'une catégorie -->
+        <record id="afs_create_category_action" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">afs.model.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Category: Action pour vue liste -->
+        <record id="afs_list_category_action" model="ir.actions.act_window">
+            <field name="name">Models</field>
+            <field name="res_model">afs.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menus -->
+        <menuitem id="afs_menu" name="Purchase (Simplified)" parent="account.menu_finance" />
+        <menuitem action="afs_create_category_action" id="menu_afs_create_category" parent="afs_menu" groups="base.group_extended" />
+        <menuitem action="afs_list_category_action" id="menu_afs_tree_category" parent="afs_menu" groups="base.group_extended" />
+    </data>
+</openerp>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Vue formulaire pour un modèle -->
+        <record id="afs_model_form_view" model="ir.ui.view">
+            <field name="name">afs.model.form</field>
+            <field name="model">afs.model</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Model">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="tva"/>
+                    <field name="ref"/>
+                    <field name="category_id" colspan="4"/>
+                    <group colspan="2" col="2">
+                        <separator string="Excl. Taxes" colspan="2" />
+                        <field name="ht_account"/>
+                        <field name="ht_position"/>
+                    </group>
+                    <group colspan="2" col="2">
+                        <separator string="VAT" colspan="2" />
+                        <field name="tva_account" />
+                        <field name="tva_position" />
+                    </group>
+                    <separator string="Incl. Taxes" colspan="4" />
+                        <field name="ttc_position" colspan="4"/>
+                        <field name="ttc_accounts" nolabel="1" colspan="4"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue liste pour les modèles -->
+        <record id="afs_model_tree_view" model="ir.ui.view">
+            <field name="name">afs.model.tree</field>
+            <field name="model">afs.model</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Models">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="tva"/>
+                    <field name="ref"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue liste pour les entrée TTC -->
+        <record id="afs_model_ttc_entry_tree_view" model="ir.ui.view">
+            <field name="name">afs.model.entry.tree</field>
+            <field name="model">afs.model.entry</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Accounts and journals per payment mode" editable="top">
+                    <field name="account_id"/>
+                    <field name="journal" widget="selection"/>
+                    <field name="payment_mode"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

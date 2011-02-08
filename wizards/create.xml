@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Vue formulaire pour les catégories de modèles -->
+        <record id="afs_wizard_create" model="ir.ui.view">
+            <field name="name">afs.wizard.create.form</field>
+            <field name="model">afs.wizard.create</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Add journal entry">
+                    <separator string="Header" colspan="4" />
+                    <group col="6" colspan="4">
+                        <field name="ref" colspan="3" />
+                        <field name="partner" colspan="3" />
+                        <field name="date" colspan="3"/>
+                        <field name="period" colspan="3" />
+                    </group>
+                    <separator string="Amounts" />
+                    <group col="2" colspan="4">
+                        <field name="amount_tva" />
+                        <field name="amount_ht" on_change="on_amount_ht_changed(amount_ht, amount_tva)" default_focus="1"/>
+                        <field name="amount_ttc" on_change="on_amount_ttc_changed(amount_ttc, amount_tva)" />
+                        <field name="payment_mode" />
+                        <field name="save" />
+                    </group>
+                    <group col="2">
+                        <button string="Cancel" icon="gtk-cancel" special="cancel"/>
+                        <button string="Add to journal" icon="gtk-ok" type="object" name="button_valid" default_focus="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

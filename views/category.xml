@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Vue formulaire pour les catégories de modèles -->
+        <record id="afs_category_form_view" model="ir.ui.view">
+            <field name="name">afs.category.form</field>
+            <field name="model">afs.model.category</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Category">
+                    <field name="name" colspan="2"/>
+                    <field name="parent_id" colspan="2" on_change="on_parent_changed(parent_id)"/>
+                    <field name="sequence" invisible="1" colspan="4"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue list pour les catégories de modèles -->
+        <record id="afs_category_list_view" model="ir.ui.view">
+            <field name="name">afs.category.tree</field>
+            <field name="model">afs.model.category</field>
+            <field name="field_parent">child_id</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Categories">
+                    <field name="complete_name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
