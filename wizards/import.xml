@@ -56,9 +56,9 @@
             <field name="context">{'type': 'export'}</field>
         </record>
 
-        <menuitem action="afs_action_import"
+        <!--<menuitem action="afs_action_import"
                   id="menu_afs_import" parent="afs_menu" groups="base.group_extended" />
         <menuitem action="afs_action_export"
-                  id="menu_afs_export" parent="afs_menu" groups="base.group_extended" />
+                  id="menu_afs_export" parent="afs_menu" groups="base.group_extended" />-->
     </data>
 </openerp>
