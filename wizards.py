@@ -25,7 +25,7 @@ from tools.translate import _
 from tools import convert_xml_import, file_open
 from afs import PAYMENTS_MODES
 
-from uidelib.tools import get_poolers, set_property, get_logo
+from uidelib.tools import get_poolers, set_property
 from uidelib.tools import get_property, search_and_read
 
 from StringIO import StringIO
@@ -253,61 +253,3 @@ class CreateEntryWizard(osv.osv_memory):
     }
 
 CreateEntryWizard()
-
-class ImportExportWizard(osv.osv_memory):
-
-    """
-    This wizard let the user import files that contains categories and models. 
-    """
-
-    def execute(self, cursor, user_id, ids, context=None):
-
-        # Import
-        if context.get('type') == 'import':
-
-            wizard = self.read(cursor, user_id, ids, context=context)[0]
-            data = base64.decodestring(wizard['file'])
-            data = StringIO(data)
-
-            convert_xml_import(cursor, 'account_fr_simplified', data, mode='update')
-
-        return {
-            'type' : 'ir.actions.act_window_close',
-        }
-
-    def get_export_content(self, cursor, user_id, context=None):
-
-        """
-        If we are showing the Export wizard, we fill the file content
-        with the XML data to save.
-        """
-
-        if context.get('type') != 'export':
-            return None
-
-        pool = get_poolers(cursor, 'afs.model.category')[0]
-        categories = pool.browse(cursor, user_id,
-                        pool.search(cursor, user_id, [], context=context), context=context)
-
-        yaml = converter.convert_to_yaml(categories)
-        yaml_file = StringIO(yaml)
-
-        xml_file = StringIO()
-
-        converter.convert_to_xml(yaml_file, xml_file)
-
-        return base64.encodestring(xml_file.getvalue())
-
-    _name = 'afs.wizard.import_export'
-
-    _columns = {
-        'file' : fields.binary('File', readonly=True),
-        'name': fields.char('Filename', 16, readonly=True),
-    }
-
-    _defaults = {
-        'name' : 'backup.xml',
-        'file' : get_export_content,
-    }
-
-ImportExportWizard()
