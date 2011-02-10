@@ -14,21 +14,17 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+#from StringIO import StringIO
 
 import datetime
-import base64
 
-from osv import osv, fields
 from lxml import etree
-from tools.translate import _
-from tools import convert_xml_import, file_open
-from afs import PAYMENTS_MODES
 
-from uidelib.tools import get_poolers, set_property
-from uidelib.tools import get_property, search_and_read
+from openerp.osv import osv, fields
+from openerp.tools.translate import _
 
-from StringIO import StringIO
+from . afs import PAYMENTS_MODES
+from . tools import get_poolers, search_and_read
 
 class CreateEntryWizard(osv.osv_memory):
 
@@ -43,11 +39,11 @@ class CreateEntryWizard(osv.osv_memory):
         """
 
         object = self.read(cursor, user_id, ids[0], context=context)
-        pmodel, pentry, pmove, pmoveline = get_poolers(cursor, 'afs.model', 'afs.model.entry',
-            'account.move', 'account.move.line')
+        puser, pmodel, pentry, pmove, pmoveline = get_poolers(cursor,
+            'res.users', 'afs.model', 'afs.model.entry', 'account.move', 'account.move.line')
         model_id = context['model']
         model = pmodel.read(cursor, user_id, model_id)
-        use_tva = get_property(cursor, user_id, 'afs_property_tva', context)
+        use_tva = puser.browse(cursor, user_id, user_id, context=context).company_id.afs_vat
         entries = search_and_read(cursor, user_id, pentry,
             [('model_id', '=', model_id)], context)
 
