@@ -248,4 +248,16 @@ class CreateEntryWizard(osv.osv_memory):
         'save' : _default_save,
     }
 
-CreateEntryWizard()
+class ImportExportWizard(osv.osv_memory):
+
+    """
+    This wizard manage the import/export function of this module.
+    """
+
+    _name = 'afs.wizard.import_export'
+    _columns = {
+        'file' : fields.binary(_('File')),
+        'file_name' : fields.char(_('File name'), size=255),
+    }
+
+CreateEntryWizard(), ImportExportWizard()

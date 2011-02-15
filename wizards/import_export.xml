@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="afs_wizard_import_export" model="ir.ui.view">
+            <field name="name">afs.wizard.import_export.form</field>
+            <field name="model">afs.wizard.import_export</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Import/Export">
+                    <field name="file" invisible="context.get('export', False)"/>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
