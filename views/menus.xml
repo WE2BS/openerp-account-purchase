@@ -23,7 +23,9 @@
             <field name="res_model">afs.wizard.import_export</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
+            <field name="view_id" ref="afs_wizard_import"/>
             <field name="context">{'import' : True}</field>
+            <field name="target">new</field>
         </record>
         
         <!-- Wizard: Export -->
@@ -32,7 +34,9 @@
             <field name="res_model">afs.wizard.import_export</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
+            <field name="view_id" ref="afs_wizard_export"/>
             <field name="context">{'export' : True}</field>
+            <field name="target">new</field>
         </record>
 
         <!-- Menus -->

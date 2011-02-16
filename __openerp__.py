@@ -29,8 +29,8 @@
         """,
     "depends" : ["account", "l10n_fr"],
     "init_xml" : [],
-    "update_xml" : ['views/category.xml', 'views/model.xml', 'wizards/create.xml',
-                    'views/menus.xml', 'views/company.xml', 'data/journals.xml', 'wizards/import_export.xml'],
+    "update_xml" : ['views/category.xml', 'views/model.xml', 'wizards/create.xml', 'wizards/import_export.xml',
+                    'views/menus.xml', 'views/company.xml', 'data/journals.xml'],
     "demo_xml" : [],
     "test" : [],
 }

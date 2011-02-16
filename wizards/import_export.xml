@@ -1,13 +1,26 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-        <record id="afs_wizard_import_export" model="ir.ui.view">
-            <field name="name">afs.wizard.import_export.form</field>
+        <record id="afs_wizard_import" model="ir.ui.view">
+            <field name="name">afs.wizard.import.form</field>
             <field name="model">afs.wizard.import_export</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Import/Export">
-                    <field name="file" invisible="context.get('export', False)"/>
+                <form string="Import">
+                    <label string="Select a file and click on 'Import':"/><newline/>
+                    <field name="file" colspan="3" nolabel="1" filename="file_name"/>
+                    <button name="on_import_clicked" type="object" string="Import" icon="gtk-ok"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="afs_wizard_export" model="ir.ui.view">
+            <field name="name">afs.wizard.export.form</field>
+            <field name="model">afs.wizard.import_export</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export">
+                    <field name="file" readonly="1" filename="file_name" nolabel="1"/>
                 </form>
             </field>
         </record>

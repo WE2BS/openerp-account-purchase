@@ -17,11 +17,14 @@
 #from StringIO import StringIO
 
 import datetime
+import base64
+import StringIO
 
 from lxml import etree
 
 from openerp.osv import osv, fields
 from openerp.tools.translate import _
+from openerp.tools.convert import convert_xml_import
 
 from . afs import PAYMENTS_MODES
 from . tools import get_poolers, search_and_read
@@ -198,29 +201,6 @@ class CreateEntryWizard(osv.osv_memory):
             result['amount_ht'] = 0.0
         return {'value': result}
 
-    def fields_view_get(self, cursor, user_id, view_id=None,
-            view_type='form', context=None, toolbar=False, submenu=False):
-
-        """
-        Replaces the label text with the model name.
-        """
-
-        view = super(CreateEntryWizard, self).fields_view_get(
-            cursor, user_id, view_id, view_type, context, toolbar, submenu)
-
-        if view_type != 'form' or 'model' not in context:
-            return view
-
-        root = etree.XML(view['arch'])
-        label = root[0]
-
-        model = self.pool.get('afs.model').read(cursor, user_id, context['model'])
-        label.set('string', model['name'])
-
-        view['arch'] = etree.tostring(root)
-        
-        return view
-
     _name = "afs.wizard.create"
     _constraints = (
         (_check_amounts, "Amounts must be superior to 0.", ['amount_ht', 'amount_ttc']),
@@ -254,10 +234,88 @@ class ImportExportWizard(osv.osv_memory):
     This wizard manage the import/export function of this module.
     """
 
+    def on_import_clicked(self, cursor, user_id, ids, context=None):
+
+        """
+        Load the XML file, and close the window if everything is ok.
+        """
+
+        file_data = self.read(cursor, user_id, ids[0], context=context)['file']
+        file_data = base64.decodestring(file_data)
+
+        fake_file = StringIO.StringIO(file_data)
+
+        convert_xml_import(cursor, 'account_fr_simplified', fake_file)
+        
+
+    def get_export_file(self, cursor, user_id, context=None):
+
+        """
+        Fills the 'file' field with export data.
+        """
+
+        if context and 'export' not in context:
+            return
+
+        pmodels, pcategory, pentry = get_poolers(cursor, 'afs.model', 'afs.model.category', 'afs.model.entry')
+
+        data  = '<?xml version="1.0" encoding="utf-8"?>'
+        data += '<openerp><data>'
+
+        category_ids = pcategory.search(cursor, user_id, [], context=context)
+        categories = pcategory.browse(cursor, user_id, category_ids, context=context)
+        model_ids = pmodels.search(cursor, user_id, [], context=context)
+        models = pmodels.browse(cursor, user_id, model_ids, context=context)
+
+        for category in categories:
+            data += '<record model="afs.model.category" id="category_%d">' % category.id
+            data += '<field name="name">%s</field>' % category.name
+            if category.parent_id.id:
+                data += '<field name="parent_id" ref="category_%d"/>' % category.parent_id.id
+            data += '<field name="sequence">%d</field></record>' % category.sequence
+
+        # Create a record for each model, category and entries
+        for model in models:
+
+            # Now, add the model basic data
+            data += '<record model="afs.model" id="model_%d">' % model.id
+            if model.category_id.id:
+                data += '<field name="category_id" ref="category_%d"/>' % model.category_id.id
+            if model.partner_id.id:
+                data += '<field name="partner_id" search="[(\'name\', \'=\', %s)]"/>' % model.partner_id.name
+            for field in ('name', 'tva', 'ref', 'save_price', 'ht_position', 'tva_position', 'ttc_position'):
+                data += '<field name="%s">%s</field>' % (field, getattr(model, field))
+            data += '<field name="ht_account" search="[(\'code\', \'=\', %s)]"/>' % model.ht_account.code
+            data += '<field name="tva_account" search="[(\'code\', \'=\', %s)]"/>' % model.tva_account.code
+            data += '</record>'
+
+            # And model TTC entries
+            for ttc_entry in model.ttc_accounts:
+                data += '<record model="afs.model.entry" id="ttc_account_%d">' % ttc_entry.id
+                data += '<field name="model_id" ref="model_%d"/>' % model.id
+                data += '<field name="account_id" search="[(\'code\', \'=\', %s)]"/>' % ttc_entry.account_id.code
+                data += '<field name="journal" search="[(\'code\', \'=\', \'%s\')]"/>' % ttc_entry.journal.code
+                data += '<field name="payment_mode">%s</field>' % ttc_entry.payment_mode
+                data += '</record>'
+
+        data += '</data></openerp>'
+
+        return base64.encodestring(data.encode('utf-8'))
+
     _name = 'afs.wizard.import_export'
+
     _columns = {
         'file' : fields.binary(_('File')),
         'file_name' : fields.char(_('File name'), size=255),
+        'state' : fields.selection((('import', 'Import'), ('export', 'Export')))
     }
+
+    _defaults = {
+        'state' :
+            lambda self, cursor, user_id, context: context.get('import', False) and 'import' or 'export',
+        'file' : get_export_file,
+        'file_name' : 'export.xml',
+    }
+
 
 CreateEntryWizard(), ImportExportWizard()
