@@ -104,7 +104,7 @@ class Model(AttachMenu, osv.osv):
         "name" : fields.char(_("Name"), size=120, required=True),
         "category_id" : fields.many2one("afs.model.category", _("Category"), required=True),
         "partner_id" : fields.many2one("res.partner", _("Partner")),
-        "tax_id" : fields.many2one("account.tax", _('VAT'), domain=TAX_DOMAIN),
+        "tax_id" : fields.many2one("account.tax", _('Tax'), domain=TAX_DOMAIN),
         "ref" : fields.char(_("REF"), size=120, required=True),
         "save_price" : fields.float(),
         "ht_position": fields.selection(POSITION, _('Untaxed Position'), required=True),

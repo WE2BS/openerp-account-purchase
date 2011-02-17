@@ -41,7 +41,26 @@
                     <field name="category_id"/>
                     <field name="tax_id"/>
                     <field name="ref"/>
+                    <field name="partner_id"/>
                 </tree>
+            </field>
+        </record>
+
+        <!-- Search view for models -->
+        <record id="afs_model_search_view" model="ir.ui.view">
+            <field name="name">afs.model.search</field>
+            <field name="model">afs.model</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Models">
+                    <field name="name" select="1" widget="char"/>
+                    <field name="ref" select="1" widget="char"/>
+                    <newline/>
+                    <group expand="1" string="Group By..." colspan="4">
+                        <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Category" icon="terp-folder-yellow" domain="[]" context="{'group_by':'category_id'}"/>
+                    </group>
+                </search>
             </field>
         </record>
 
