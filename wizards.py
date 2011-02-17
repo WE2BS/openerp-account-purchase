@@ -23,6 +23,7 @@ import StringIO
 from lxml import etree
 
 from openerp.osv import osv, fields
+from openerp.tools.misc import cache
 from openerp.tools.translate import _
 from openerp.tools.convert import convert_xml_import
 
@@ -171,6 +172,13 @@ class CreateEntryWizard(osv.osv_memory):
 
         return None
 
+    def _default_payment_mode(self, cursor, user_id, context):
+
+        try:
+            return self._get_payments_mode(cursor, user_id, context)[0]
+        except KeyError:
+            return
+
     def _check_amounts(self, cursor, user_id, ids, context=None):
 
         for record in self.browse(cursor, user_id, ids):
@@ -188,6 +196,7 @@ class CreateEntryWizard(osv.osv_memory):
         model = self.pool.get('afs.model').read(cursor, user_id, context['model'])
         return model['save_price']
 
+    @cache(5)
     def _get_payments_mode(self, cursor, user_id, context=None):
 
         """
@@ -261,6 +270,7 @@ class CreateEntryWizard(osv.osv_memory):
         'amount_ht' : _default_amount_ht,
         'amount_ttc' : 0.0,
         'save' : _default_save,
+        'payment_mode' : _default_payment_mode,
     }
 
 class ImportExportWizard(osv.osv_memory):
