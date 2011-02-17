@@ -40,6 +40,7 @@ POSITION = (
 )
 
 ACCOUNTS_DOMAIN = [('type', '!=', 'view')]
+TAX_DOMAIN = [('type_tax_use', 'in', ('purchase', 'all'))]
 JOURNALS_DOMAIN = [('code', 'in', ('VT', 'BQ', 'HA', 'OD'))]
 JOURNALS = {
     'VT' : 'ventes',
@@ -48,26 +49,44 @@ JOURNALS = {
     'OD' : 'divers',
 }
 
+class Tax(osv.osv):
+
+    """
+    We just redefine the account.tax model to override name_get method wich returns
+    by default the code instead of the name.
+    """
+
+    _name = 'account.tax'
+    _inherit = 'account.tax'
+
+    def name_get(self, cursor, user_id, ids, context=None):
+
+        if not ids:
+            return []
+
+        return [(t['id'], t['name']) for t in self.read(cursor, user_id, ids, ['name'], context=context)]
+
 class Model(AttachMenu, osv.osv):
     
     """
     Represents a model, like 'Elecricity Invoice'.
     """
 
-    def _get_parent_menu_id(self, cursor, user_id, object_data, context=None):
+    def _get_parent_menu_id(self, cursor, user_id, object, context=None):
 
-        category = self.pool.get('afs.model.category').read(cursor, user_id,
-                int(object_data['category_id'][0]))
-        
-        return category['menu_id'][0]
+        """
+        The parent menu of a Model is the menu of its category.
+        """
 
-    def _get_menu_context(self, cursor, user_id, object_data, context=None):
+        return object.category_id.menu_id.id
 
-        if 'id' not in object_data:
-            return None
+    def _get_menu_context(self, cursor, user_id, object, context=None):
 
-        return "{'category' : %d, 'model' : %d }" % (
-            object_data['category_id'][0], object_data['id'])
+        """
+        Returns the context used by the menu. This context will be used in the wizard.
+        """
+
+        return "{'category' : %d, 'model' : %d }" % (object.category_id.id, object.id)
 
     # Configure menu auto-generation
     _menu_name = 'name'
@@ -80,12 +99,12 @@ class Model(AttachMenu, osv.osv):
     _menu_target = 'new'
     
     _name = "afs.model"
-    _defaults = {'save_price' : False, 'tva_position' : 'd', 'ttc_position' : 'c', 'ht_position' : 'd', 'tva' : 0.0}
+    _defaults = {'save_price' : False, 'tva_position' : 'd', 'ttc_position' : 'c', 'ht_position' : 'd'}
     _columns = {
         "name" : fields.char(_("Name"), size=120, required=True),
         "category_id" : fields.many2one("afs.model.category", _("Category"), required=True),
         "partner_id" : fields.many2one("res.partner", _("Partner")),
-        "tva" : fields.float(_("TVA (%)")),
+        "tax_id" : fields.many2one("account.tax", _('VAT'), domain=TAX_DOMAIN),
         "ref" : fields.char(_("REF"), size=120, required=True),
         "save_price" : fields.float(),
         "ht_position": fields.selection(POSITION, _('Untaxed Position'), required=True),
@@ -170,18 +189,16 @@ class ModelCategory(AttachMenu, osv.osv):
 
         return super(ModelCategory, self).unlink(cursor, user_id, ids, context)
 
-    def _get_parent_menu_id(self, cursor, user_id, object_data, context=None):
+    def _get_parent_menu_id(self, cursor, user_id, object, context=None):
 
         """
         Must returns the parent menu id.
         """
 
-        if not object_data['parent_id']:
+        if not object.parent_id.id:
             return 'afs_menu'
 
-        parent = self.read(cursor, user_id, object_data['parent_id'][0])
-
-        return parent['menu_id'][0]
+        return object.parent_id.menu_id.id
     
     # Configure menu auto-generation
     _menu_name = 'name'
@@ -211,4 +228,4 @@ class TTCModelEntry(osv.osv):
     }
 
 # - Instances -
-ModelCategory(), Model(), TTCModelEntry()
+ModelCategory(), Model(), TTCModelEntry(), Tax()

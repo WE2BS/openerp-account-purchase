@@ -142,9 +142,12 @@ class CreateEntryWizard(osv.osv_memory):
              ('date_stop', '>=', today),
              ('state', '=', 'draft')],
         )
+
         if not period_ids:
             return False
+
         periods = self.pool.get('account.period').browse(cursor, user_id, period_ids)
+
         return periods[0].id
 
     def _default_ref(self, cursor, user_id, context):
@@ -159,10 +162,14 @@ class CreateEntryWizard(osv.osv_memory):
             return model['partner_id'][0]
         return False
       
-    def _default_tva(self, cursor, user_id, context):
+    def _default_tax(self, cursor, user_id, context):
 
         model = self.pool.get('afs.model').read(cursor, user_id, context['model'])
-        return model['tva']
+
+        if model['tax_id']:
+            return model['tax_id'][0]
+
+        return None
 
     def _check_amounts(self, cursor, user_id, ids, context=None):
 
@@ -180,25 +187,54 @@ class CreateEntryWizard(osv.osv_memory):
 
         model = self.pool.get('afs.model').read(cursor, user_id, context['model'])
         return model['save_price']
-   
-    def on_amount_ht_changed(self, cursor, user_id, id, amount_ht, tva):
 
-        result = {}
-        try:
-            result['amount_ttc'] = float(amount_ht) * (1 + tva / 100.0)
-        except ValueError:
-            result['amount_ttc'] = 0.0
-            result['amount_ht'] = 0.0
+    def _get_payments_mode(self, cursor, user_id, context=None):
+
+        """
+        We returns the Payment mode associated with the model specified in context.
+        Only modes that have a line in TCC entries are returned.
+        """
+
+        if 'model' not in context:
+            return
+
+        model = self.pool.get('afs.model').browse(cursor, user_id, context['model'])
+        modes = [a.payment_mode for a in model.ttc_accounts]
+
+        return [(k, v) for k, v in PAYMENTS_MODES if k in modes]
+
+    def on_amount_ht_changed(self, cursor, user_id, id, amount_ht, tax):
+
+        if not tax:
+            result = {
+                'amount_ttc' : 0,
+                'amount_ht' : 0
+            }
+        else:
+            tax = self.pool.get('account.tax').browse(cursor, user_id, tax)
+            computed_prices = self.pool.get('account.tax').compute_all(cursor, user_id, [tax], amount_ht, 1)
+            result = {
+                'amount_ttc' : computed_prices['total_included'],
+                'amount_ht' : computed_prices['total']
+            }
+
         return {'value': result}
 
-    def on_amount_ttc_changed(self, cursor, user_id, id, amount_ttc, tva):
+    def on_amount_ttc_changed(self, cursor, user_id, id, amount_ttc, tax_id):
 
         result = {}
-        try:
-            result['amount_ht'] = float(amount_ttc) / (1 + tva / 100.0)
-        except ValueError:
-            result['amount_ttc'] = 0.0
-            result['amount_ht'] = 0.0
+
+        if not tax_id:
+            return result
+
+        taxes = self.pool.get('account.tax').browse(cursor, user_id, [tax_id])
+        computed = self.pool.get('account.tax').compute_inv(cursor, user_id, taxes, amount_ttc, 1)[0]
+
+        result = {
+            'amount_ttc' : amount_ttc,
+            'amount_ht' : computed['price_unit']
+        }
+
         return {'value': result}
 
     _name = "afs.wizard.create"
@@ -212,8 +248,8 @@ class CreateEntryWizard(osv.osv_memory):
         'partner' : fields.many2one('res.partner', _('Partner')),
         'amount_ht' : fields.float(_('Amount untaxed'), required=True),
         'amount_ttc' : fields.float(_('Amount taxed'), required=True),
-        'amount_tva' : fields.float(_('TVA'), readonly=True),
-        'payment_mode' : fields.selection(PAYMENTS_MODES, _('Payment mode'), required=True),
+        'tax_id' : fields.many2one('account.tax', _('Tax'), readonly=True),
+        'payment_mode' : fields.selection(_get_payments_mode, _('Payment mode'), required=True),
         'save' : fields.boolean(_('Remember the price')),
     }
     _defaults = {
@@ -221,8 +257,7 @@ class CreateEntryWizard(osv.osv_memory):
         'period' : _default_period,
         'ref' : _default_ref,
         'partner' : _default_partner,
-        'amount_tva' : _default_tva,
-        'payment_mode' : 'cash',
+        'tax_id' : _default_tax,
         'amount_ht' : _default_amount_ht,
         'amount_ttc' : 0.0,
         'save' : _default_save,
@@ -245,13 +280,15 @@ class ImportExportWizard(osv.osv_memory):
 
         fake_file = StringIO.StringIO(file_data)
 
-        convert_xml_import(cursor, 'account_fr_simplified', fake_file)
+        convert_xml_import(cursor, 'account_fr_simplified', fake_file, mode='update', noupdate=True)
         
-
     def get_export_file(self, cursor, user_id, context=None):
 
         """
-        Fills the 'file' field with export data.
+        Fills the 'file' field with export data. An XML file is created which contains :
+            - Categories
+            - Models
+            - Models entries
         """
 
         if context and 'export' not in context:
@@ -282,8 +319,11 @@ class ImportExportWizard(osv.osv_memory):
             if model.category_id.id:
                 data += '<field name="category_id" ref="category_%d"/>' % model.category_id.id
             if model.partner_id.id:
-                data += '<field name="partner_id" search="[(\'name\', \'=\', %s)]"/>' % model.partner_id.name
-            for field in ('name', 'tva', 'ref', 'save_price', 'ht_position', 'tva_position', 'ttc_position'):
+                data += '<field name="partner_id" search="[(\'name\', \'=\', \'%s\')]"/>' % model.partner_id.name
+            if model.tax_id.id:
+                data += "<field name=\"tax_id\" search=\"['|', ('name', '=', '%s'), ('description', '=', '%s')]\"/>" % (
+                    model.tax_id.name, model.tax_id.description)
+            for field in ('name', 'ref', 'save_price', 'ht_position', 'tva_position', 'ttc_position'):
                 data += '<field name="%s">%s</field>' % (field, getattr(model, field))
             data += '<field name="ht_account" search="[(\'code\', \'=\', %s)]"/>' % model.ht_account.code
             data += '<field name="tva_account" search="[(\'code\', \'=\', %s)]"/>' % model.tva_account.code

@@ -7,7 +7,9 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Import">
-                    <label string="Select a file and click on 'Import':"/><newline/>
+                    <label string="Select a file and click on 'Import':"/>
+                    <field name="file_name" invisible="1"/>
+                    <newline/>
                     <field name="file" colspan="3" nolabel="1" filename="file_name"/>
                     <button name="on_import_clicked" type="object" string="Import" icon="gtk-ok"/>
                 </form>
@@ -20,6 +22,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Export">
+                    <field name="file_name" invisible="1"/>
                     <field name="file" readonly="1" filename="file_name" nolabel="1"/>
                 </form>
             </field>

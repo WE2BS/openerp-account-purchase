@@ -10,7 +10,7 @@
                 <form string="Model">
                     <field name="name"/>
                     <field name="partner_id"/>
-                    <field name="tva"/>
+                    <field name="tax_id"/>
                     <field name="ref"/>
                     <field name="category_id" colspan="4"/>
                     <group colspan="2" col="2">
@@ -39,7 +39,7 @@
                 <tree string="Models">
                     <field name="name"/>
                     <field name="category_id"/>
-                    <field name="tva"/>
+                    <field name="tax_id"/>
                     <field name="ref"/>
                 </tree>
             </field>

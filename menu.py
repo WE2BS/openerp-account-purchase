@@ -299,7 +299,7 @@ class AttachMenu(object):
 
         return super(AttachMenu, cls).__new__(cls, *args, **kwargs)
 
-    def get_config_values(self, cursor, user_id, object_data, context=None):
+    def get_config_values(self, cursor, user_id, object, context=None):
 
         # Returns a dictionary which contains all configuration values
         # calculated for this object (the _menu_ is truncated)
@@ -311,7 +311,7 @@ class AttachMenu(object):
             attr = getattr(self, config_name)
             name = config_name[6:]
             if callable(attr):
-                config_values[name] = attr(cursor, user_id, object_data, context)
+                config_values[name] = attr(cursor, user_id, object, context)
             else:
                 config_values[name] = attr
 
@@ -330,10 +330,10 @@ class AttachMenu(object):
         
         object_data['menu_id'] = menu.id
         object_id = super(AttachMenu, self).create(cursor, user_id, object_data, context)
-        object_data = self.read(cursor, user_id, object_id, context=context)
+        object = self.browse(cursor, user_id, object_id, context=context)
         
-        config = self.get_config_values(cursor, user_id, object_data, context)
-        name = object_data[config['name']]
+        config = self.get_config_values(cursor, user_id, object, context)
+        name = getattr(object, config['name'])
 
         if config['parent']:
             menu_parent = Menu.get_from_id(cursor, user_id, config['parent'])
@@ -368,10 +368,10 @@ class AttachMenu(object):
         except TypeError:
             ids = [ids]
 
-        objects = self.browse(cursor, user_id, ids)
+        objects = self.browse(cursor, user_id, ids, context=context)
 
         for object in objects:
-            if not object.menu_id.id:
+            if not hasattr(object, 'menu_id') or not object.menu_id.id:
                 # May not happen, but we check to avoid errors
                 continue
             menu = Menu.get_from_id(cursor, user_id, object.menu_id.id)
@@ -383,23 +383,35 @@ class AttachMenu(object):
 
         #
         # We override the default write() method to rename the menu if the
-        # name of the object changed.
+        # name of the object changed, and change the menu parent if needed.
         #
 
+        result = super(AttachMenu, self).write(cursor, user_id, ids, values, context)
+        
         try:
             iter(ids)
         except TypeError:
             ids = [ids]
 
-        objects = self.read(cursor, user_id, ids, context=context)
+        objects = self.browse(cursor, user_id, ids, context=context)
 
-        for object_data in objects:
-            config = self.get_config_values(cursor, user_id, object_data, context)
-            field_name = config['name']
-            if field_name not in values or field_name not in object_data:
-                continue # Name didn't change
-            if (object_data[field_name] != values[field_name]) and object_data['menu_id']:
-                menu = Menu.get_from_id(cursor, user_id, object_data['menu_id'][0])
-                menu.update(cursor, user_id, name=values[field_name])
+        for object in objects:
 
-        return super(AttachMenu, self).write(cursor, user_id, ids, values, context)
+            # Note: The config values returned are based on the new values
+            # because we saved the object with super().
+            config = self.get_config_values(cursor, user_id, object, context)
+            name_field = config['name']
+            
+            menu = Menu.get_from_id(cursor, user_id, object.menu_id.id)
+            to_update = {}
+
+            if name_field in values:
+                if (getattr(object, name_field) != values[name_field]) and object.menu_id.id:
+                    to_update['name'] = values[name_field]
+            
+            if config['parent'] != menu.parent.id:
+                to_update['parent'] = Menu.get_from_id(cursor, user_id, config['parent'])
+
+            menu.update(cursor, user_id, **to_update)
+
+        return result
