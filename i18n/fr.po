@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1-dev\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-02-10 10:03+0000\n"
-"PO-Revision-Date: 2011-02-10 10:03+0000\n"
+"POT-Creation-Date: 2011-02-21 14:31+0000\n"
+"PO-Revision-Date: 2011-02-21 14:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:86
+#: code:addons/account_fr_simplified/afs.py:105
+#: view:afs.model:0
 #: field:afs.model,category_id:0
 #: view:afs.model.category:0
 #, python-format
@@ -24,31 +25,14 @@ msgid "Category"
 msgstr "Catégorie"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:93
-#: field:afs.model,ttc_position:0
-#, python-format
-msgid "Taxed Position"
-msgstr "Position TTC"
-
-#. module: account_fr_simplified
-#: model:ir.ui.menu,name:account_fr_simplified.afs_menu
-msgid "Purchase (Simplified)"
-msgstr "Gestion des achats (Simplifiée)"
-
-#. module: account_fr_simplified
-#: view:afs.wizard.import_export:0
-msgid "Where do you want to save the file :"
-msgstr "Où voulez-vous enregistrer le fichier :"
-
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_model_entry
-msgid "afs.model.entry"
-msgstr "afs.model.entry"
+#: model:ir.module.module,shortdesc:account_fr_simplified.module_meta_information
+msgid "Accouting purchase management"
+msgstr "Accouting purchase management"
 
 #. module: account_fr_simplified
 #: view:afs.wizard.create:0
 msgid "Amounts"
-msgstr "Montans"
+msgstr "Montants"
 
 #. module: account_fr_simplified
 #: model:ir.model,name:account_fr_simplified.model_afs_wizard_create
@@ -58,24 +42,24 @@ msgstr "afs.wizard.create"
 #. module: account_fr_simplified
 #: constraint:res.company:0
 msgid "Error! You can not create recursive companies."
-msgstr ""
+msgstr "Erreur ! Vous ne pouvez pas créer de sociétés récursives"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:197
+#: view:afs.wizard.import_export:0
+msgid "Select a file and click on 'Import':"
+msgstr "Selectionnez un fichier et cliquez sur 'Importer':"
+
+#. module: account_fr_simplified
+#: code:addons/account_fr_simplified/afs.py:214
 #: field:afs.model.category,child_ids:0
 #, python-format
 msgid "Child Categories"
-msgstr "Catégories enfant"
-
-#. module: account_fr_simplified
-#: field:afs.wizard.import_export,name:0
-msgid "Filename"
-msgstr "Nom du fichier"
+msgstr "Sous-categories"
 
 #. module: account_fr_simplified
 #: view:afs.wizard.create:0
 msgid "Add journal entry"
-msgstr "Créer les entrées dans les journaux"
+msgstr "Ajouter aux journaux"
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:33
@@ -86,14 +70,14 @@ msgstr "HT"
 #. module: account_fr_simplified
 #: model:ir.model,name:account_fr_simplified.model_afs_model_category
 msgid "afs.model.category"
-msgstr ""
+msgstr "afs.model.category"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:238
+#: code:addons/account_fr_simplified/wizards.py:257
 #: field:afs.wizard.create,amount_ttc:0
 #, python-format
 msgid "Amount taxed"
-msgstr "TTC"
+msgstr "Montant TTC"
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:38
@@ -106,25 +90,54 @@ msgstr "Débit"
 
 #. module: account_fr_simplified
 #: view:afs.wizard.import_export:0
+#: selection:afs.wizard.import_export,state:0
+#: model:ir.actions.act_window,name:account_fr_simplified.afs_import_action
+#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_import
 msgid "Import"
 msgstr "Importer"
 
 #. module: account_fr_simplified
 #: model:ir.module.module,description:account_fr_simplified.module_meta_information
 msgid "\n"
-"        Ce module simplifie la gestion des achats en créant des modèles réutilisables\n"
-"        qui place directement ce qu'il faut au bon endroit dans les journaux.\n"
+"        This module let you easily create journal entries for simple purchases like internet or phone without\n"
+"        using the purchase module. Read the documentation for more informarion.\n"
+"\n"
+"        Module's homepage: http://github.com/thibautd/openerp-account_purchase/\n"
+"        Module's documentation:\n"
+"\n"
+"        Please note that this module has been created for french accounting, but it might work for\n"
+"        other coutries too. Please report issues on the github page.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Ce module vous permet de créer facilement les écritures comptables de vos achats comme internet ou le téléphone\n"
+"        sans utiliser le module purchase. Consultez la documentation pour plus d'informations.\n"
+"\n"
+"        Site web: http://github.com/thibautd/openerp-account_purchase/\n"
+"        Documentation:\n"
+"\n"
+"        Note: Ce module a été créé pour la comptabilité française.\n"
+"        "
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:89
-#: code:addons/account_fr_simplified/wizards.py:235
+#: code:addons/account_fr_simplified/afs.py:108
+#: code:addons/account_fr_simplified/wizards.py:254
 #: field:afs.model,ref:0
 #: field:afs.wizard.create,ref:0
 #, python-format
 msgid "REF"
-msgstr ""
+msgstr "REF"
+
+#. module: account_fr_simplified
+#: code:addons/account_fr_simplified/afs.py:110
+#: field:afs.model,ht_position:0
+#, python-format
+msgid "Untaxed amount position"
+msgstr "Position HT"
+
+#. module: account_fr_simplified
+#: view:afs.model:0
+msgid "Search Models"
+msgstr "Rechercher dans les modèles"
 
 #. module: account_fr_simplified
 #: view:afs.model:0
@@ -134,132 +147,119 @@ msgstr "HT"
 #. module: account_fr_simplified
 #: model:ir.model,name:account_fr_simplified.model_afs_wizard_import_export
 msgid "afs.wizard.import_export"
-msgstr ""
+msgstr "afs.wizard.import_export"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:196
+#: code:addons/account_fr_simplified/afs.py:213
+#: code:addons/account_fr_simplified/menu.py:62
 #: field:afs.model.category,parent_id:0
 #, python-format
 msgid "Parent"
-msgstr ""
+msgstr "Parent"
 
 #. module: account_fr_simplified
-#: view:afs.wizard.create:0
-msgid "Header"
-msgstr "En-tête"
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:198
+#: code:addons/account_fr_simplified/afs.py:215
 #: view:afs.model:0
 #: field:afs.model.category,model_ids:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_list_category_action
+#: model:ir.actions.act_window,name:account_fr_simplified.afs_models_action
 #: model:ir.ui.menu,name:account_fr_simplified.menu_afs_tree_category
 #, python-format
 msgid "Models"
 msgstr "Modèles"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:241
+#: code:addons/account_fr_simplified/wizards.py:260
 #: field:afs.wizard.create,save:0
 #, python-format
 msgid "Remember the price"
 msgstr "Se souvenir du prix"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:209
+#: code:addons/account_fr_simplified/afs.py:226
 #: field:afs.model.entry,journal:0
 #, python-format
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_fr_simplified
 #: field:afs.model,menu_id:0
 #: field:afs.model,save_price:0
 #: field:afs.model.category,menu_id:0
+#: field:afs.wizard.import_export,state:0
 msgid "unknown"
-msgstr ""
-
-#. module: account_fr_simplified
-#: view:afs.wizard.import_export:0
-msgid "Import a data file"
-msgstr ""
+msgstr "unknown"
 
 #. module: account_fr_simplified
 #: constraint:afs.wizard.create:0
 msgid "Amounts must be superior to 0."
-msgstr "Les montants doivent être > à 0."
+msgstr "Les montants doivent être superieurs à 0."
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/company.py:31
 #: field:res.company,afs_vat:0
 #, python-format
 msgid "This company is subject to VAT."
-msgstr "Cette société est assujetie à la TVA"
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:92
-#: field:afs.model,tva_position:0
-#, python-format
-msgid "VAT Position"
-msgstr "Position TVA"
+msgstr "Cette société est assujettie à la TVA."
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:28
 #: selection:afs.model.entry,payment_mode:0
-#: selection:afs.wizard.create,payment_mode:0
 #, python-format
 msgid "Instrument of trade"
 msgstr "Effet de commerce"
 
 #. module: account_fr_simplified
-#: view:afs.wizard.import_export:0
-msgid "Select the file you want to import :"
-msgstr "Sélectionnez le fichier à importer"
-
-#. module: account_fr_simplified
-#: view:afs.wizard.import_export:0
-msgid "Export a data file"
-msgstr "Exporter a fichier de donnée"
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:233
-#: field:afs.wizard.create,date:0
+#: code:addons/account_fr_simplified/afs.py:34
+#: view:afs.model:0
 #, python-format
-msgid "Date"
-msgstr ""
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:239
-#: field:afs.wizard.create,amount_tva:0
-#, python-format
-msgid "TVA"
+msgid "VAT"
 msgstr "TVA"
 
 #. module: account_fr_simplified
-#: view:afs.model.category:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_create_category_action
-#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_create_category
-msgid "Categories"
-msgstr "Catégories"
+#: code:addons/account_fr_simplified/wizards.py:252
+#: field:afs.wizard.create,date:0
+#, python-format
+msgid "Date"
+msgstr "Date"
 
 #. module: account_fr_simplified
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_action_import
-msgid "Import data from an XML file"
-msgstr ""
+#: code:addons/account_fr_simplified/afs.py:114
+#: field:afs.model,tva_account:0
+#, python-format
+msgid "Tax account"
+msgstr "Compte de taxe"
+
+#. module: account_fr_simplified
+#: view:afs.model.category:0
+#: model:ir.actions.act_window,name:account_fr_simplified.afs_categories_action
+#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_create_category
+msgid "Categories"
+msgstr "Categories"
+
+#. module: account_fr_simplified
+#: model:ir.model,name:account_fr_simplified.model_account_tax
+msgid "account.tax"
+msgstr "account.tax"
+
+#. module: account_fr_simplified
+#: model:ir.ui.menu,name:account_fr_simplified.afs_menu
+#: model:ir.ui.menu,name:account_fr_simplified.afs_menu_config
+msgid "Purchase"
+msgstr "Achats"
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:27
-#: code:addons/account_fr_simplified/afs.py:208
+#: code:addons/account_fr_simplified/afs.py:225
 #: field:afs.model.entry,account_id:0
 #: selection:afs.model.entry,payment_mode:0
-#: selection:afs.wizard.create,payment_mode:0
 #, python-format
 msgid "Account"
 msgstr "Compte"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:85
-#: code:addons/account_fr_simplified/afs.py:194
+#: code:addons/account_fr_simplified/afs.py:104
+#: code:addons/account_fr_simplified/afs.py:211
+#: code:addons/account_fr_simplified/menu.py:61
 #: field:afs.model,name:0
 #: field:afs.model.category,complete_name:0
 #: field:afs.model.category,name:0
@@ -268,11 +268,16 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:91
-#: field:afs.model,ht_position:0
+#: model:ir.model,name:account_fr_simplified.model_afs_model_entry
+msgid "afs.model.entry"
+msgstr "afs.model.entry"
+
+#. module: account_fr_simplified
+#: code:addons/account_fr_simplified/wizards.py:357
+#: field:afs.wizard.import_export,file_name:0
 #, python-format
-msgid "Untaxed Position"
-msgstr "Position HT"
+msgid "File name"
+msgstr "Nom du fichier"
 
 #. module: account_fr_simplified
 #: model:ir.model,name:account_fr_simplified.model_res_company
@@ -282,7 +287,6 @@ msgstr "Sociétés"
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:25
 #: selection:afs.model.entry,payment_mode:0
-#: selection:afs.wizard.create,payment_mode:0
 #, python-format
 msgid "Cash"
 msgstr "Liquide"
@@ -297,16 +301,14 @@ msgid "Credit"
 msgstr "Crédit"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:87
-#: code:addons/account_fr_simplified/wizards.py:236
-#: field:afs.model,partner_id:0
-#: field:afs.wizard.create,partner:0
+#: code:addons/account_fr_simplified/afs.py:115
+#: field:afs.model,ttc_accounts:0
 #, python-format
-msgid "Partner"
-msgstr "Partenaire"
+msgid "Taxed amount accounts"
+msgstr "Compte TTC"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:207
+#: code:addons/account_fr_simplified/afs.py:224
 #: view:afs.model:0
 #: field:afs.model.entry,model_id:0
 #, python-format
@@ -319,7 +321,7 @@ msgid "Add to journal"
 msgstr "Ajouter aux journaux"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:94
+#: code:addons/account_fr_simplified/afs.py:113
 #: field:afs.model,ht_account:0
 #, python-format
 msgid "Untaxed Account"
@@ -331,18 +333,18 @@ msgid "Incl. Taxes"
 msgstr "TTC"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:34
-#: view:afs.model:0
+#: code:addons/account_fr_simplified/afs.py:111
+#: field:afs.model,tva_position:0
 #, python-format
-msgid "VAT"
-msgstr "TVA"
+msgid "Tax position"
+msgstr "Position taxe"
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/company.py:32
 #: help:res.company,afs_vat:0
 #, python-format
 msgid "Check this if you company is subject to VAT. This is used by the Account FR Simplified module to handle journal entries."
-msgstr ""
+msgstr "Cochez cette case si votre société est assujettie à la TVA."
 
 #. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:32
@@ -351,23 +353,8 @@ msgid "Incl. Tax"
 msgstr "TTC"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:95
-#: field:afs.model,tva_account:0
-#, python-format
-msgid "VAT Account"
-msgstr "Compte TVA"
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:88
-#: field:afs.model,tva:0
-#, python-format
-msgid "TVA (%)"
-msgstr ""
-
-#. module: account_fr_simplified
 #: code:addons/account_fr_simplified/afs.py:26
 #: selection:afs.model.entry,payment_mode:0
-#: selection:afs.wizard.create,payment_mode:0
 #, python-format
 msgid "Bank"
 msgstr "Banque"
@@ -375,15 +362,29 @@ msgstr "Banque"
 #. module: account_fr_simplified
 #: view:afs.model.entry:0
 msgid "Accounts and journals per payment mode"
-msgstr "Compte et journaux par mode de paiement"
+msgstr "Comptes et journaux par mode de paiement"
+
+#. module: account_fr_simplified
+#: view:afs.model:0
+msgid "Group By..."
+msgstr "Grouper Par..."
 
 #. module: account_fr_simplified
 #: field:afs.model.category,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Sequence"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:234
+#: code:addons/account_fr_simplified/afs.py:107
+#: code:addons/account_fr_simplified/wizards.py:258
+#: field:afs.model,tax_id:0
+#: field:afs.wizard.create,tax_id:0
+#, python-format
+msgid "Tax"
+msgstr "Taxe"
+
+#. module: account_fr_simplified
+#: code:addons/account_fr_simplified/wizards.py:253
 #: field:afs.wizard.create,period:0
 #, python-format
 msgid "Period"
@@ -392,28 +393,38 @@ msgstr "Periode"
 #. module: account_fr_simplified
 #: model:ir.model,name:account_fr_simplified.model_afs_model
 msgid "afs.model"
-msgstr ""
+msgstr "afs.model"
 
 #. module: account_fr_simplified
-#: model:ir.module.module,shortdesc:account_fr_simplified.module_meta_information
-msgid "Gestion simplifiée des achats"
-msgstr ""
+#: view:afs.wizard.create:0
+msgid "Header"
+msgstr "En-tête"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:237
+#: view:afs.wizard.import_export:0
+#: selection:afs.wizard.import_export,state:0
+#: model:ir.actions.act_window,name:account_fr_simplified.afs_export_action
+#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_export
+msgid "Export"
+msgstr "Exporter"
+
+#. module: account_fr_simplified
+#: code:addons/account_fr_simplified/wizards.py:256
 #: field:afs.wizard.create,amount_ht:0
 #, python-format
 msgid "Amount untaxed"
 msgstr "Montant HT"
 
 #. module: account_fr_simplified
+#: code:addons/account_fr_simplified/wizards.py:356
 #: field:afs.wizard.import_export,file:0
+#, python-format
 msgid "File"
 msgstr "Fichier"
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:210
-#: code:addons/account_fr_simplified/wizards.py:240
+#: code:addons/account_fr_simplified/afs.py:227
+#: code:addons/account_fr_simplified/wizards.py:259
 #: field:afs.model.entry,payment_mode:0
 #: field:afs.wizard.create,payment_mode:0
 #, python-format
@@ -422,29 +433,28 @@ msgstr "Mode de paiement"
 
 #. module: account_fr_simplified
 #: view:afs.wizard.create:0
-#: view:afs.wizard.import_export:0
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: account_fr_simplified
-#: view:afs.wizard.import_export:0
-msgid "Close"
-msgstr "Fermer"
+#: code:addons/account_fr_simplified/afs.py:106
+#: code:addons/account_fr_simplified/wizards.py:255
+#: view:afs.model:0
+#: field:afs.model,partner_id:0
+#: field:afs.wizard.create,partner:0
+#, python-format
+msgid "Partner"
+msgstr "Partenaire"
 
 #. module: account_fr_simplified
 #: help:afs.model.category,sequence:0
 msgid "Represents the weight of the item in the menu. Bigger number means menu will be at bottom."
-msgstr ""
+msgstr "Represents the weight of the item in the menu. Bigger number means menu will be at bottom."
 
 #. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:96
-#: field:afs.model,ttc_accounts:0
+#: code:addons/account_fr_simplified/afs.py:112
+#: field:afs.model,ttc_position:0
 #, python-format
-msgid "Taxed Accounts"
-msgstr "Comptes TTC"
-
-#. module: account_fr_simplified
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_action_export
-msgid "Export data to an XML file"
-msgstr ""
+msgid "Taxed amount position"
+msgstr "Position TTC"
 

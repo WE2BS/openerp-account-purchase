@@ -17,15 +17,21 @@
 #
 
 {
-    "name" : "Gestion simplifiée des achats",
+    "name" : "Accouting purchase management",
     "version" : "0.1",
     "author" : "UIDE/WE2BS",
     "category": 'Generic Modules/Accounting',
     "website" : "http://www.idee-ecran.org",
     "description" :
         """
-        Ce module simplifie la gestion des achats en créant des modèles réutilisables
-        qui place directement ce qu'il faut au bon endroit dans les journaux.
+        This module let you easily create journal entries for simple purchases like internet or phone without
+        using the purchase module. Read the documentation for more informarion.
+
+        Module's homepage: http://github.com/thibautd/openerp-account_purchase/
+        Module's documentation:
+
+        Please note that this module has been created for french accounting, but it might work for
+        other coutries too. Please report issues on the github page.
         """,
     "depends" : ["account"],
     "init_xml" : [],

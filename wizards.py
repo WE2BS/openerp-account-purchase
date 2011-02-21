@@ -288,7 +288,7 @@ class ImportExportWizard(osv.osv_memory):
 
         fake_file = StringIO.StringIO(file_data)
 
-        convert_xml_import(cursor, 'account_fr_simplified', fake_file, mode='update', noupdate=True)
+        convert_xml_import(cursor, 'account_purchase', fake_file, mode='update', noupdate=True)
         
     def get_export_file(self, cursor, user_id, context=None):
 

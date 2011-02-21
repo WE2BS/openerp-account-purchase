@@ -107,12 +107,12 @@ class Model(AttachMenu, osv.osv):
         "tax_id" : fields.many2one("account.tax", _('Tax'), domain=TAX_DOMAIN),
         "ref" : fields.char(_("REF"), size=120, required=True),
         "save_price" : fields.float(),
-        "ht_position": fields.selection(POSITION, _('Untaxed Position'), required=True),
-        "tva_position" : fields.selection(POSITION, _('VAT Position'), required=True),
-        "ttc_position" : fields.selection(POSITION, _('Taxed Position'), required=True),
+        "ht_position": fields.selection(POSITION, _('Untaxed amount position'), required=True),
+        "tva_position" : fields.selection(POSITION, _('Tax position'), required=True),
+        "ttc_position" : fields.selection(POSITION, _('Taxed amount position'), required=True),
         "ht_account" : fields.many2one("account.account", _('Untaxed Account'), domain=ACCOUNTS_DOMAIN, required=True),
-        "tva_account" : fields.many2one("account.account", _('VAT Account'), domain=ACCOUNTS_DOMAIN, required=True),
-        "ttc_accounts" : fields.one2many("afs.model.entry", "model_id", _('Taxed Accounts'), required=True)
+        "tva_account" : fields.many2one("account.account", _('Tax account'), domain=ACCOUNTS_DOMAIN, required=True),
+        "ttc_accounts" : fields.one2many("afs.model.entry", "model_id", _('Taxed amount accounts'), required=True)
     }
 
 class ModelCategory(AttachMenu, osv.osv):
