@@ -20,8 +20,6 @@ import datetime
 import base64
 import StringIO
 
-from lxml import etree
-
 from openerp.osv import osv, fields
 from openerp.tools.misc import cache
 from openerp.tools.translate import _
@@ -366,6 +364,5 @@ class ImportExportWizard(osv.osv_memory):
         'file' : get_export_file,
         'file_name' : 'export.xml',
     }
-
 
 CreateEntryWizard(), ImportExportWizard()

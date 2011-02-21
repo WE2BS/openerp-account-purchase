@@ -27,7 +27,7 @@
         Ce module simplifie la gestion des achats en créant des modèles réutilisables
         qui place directement ce qu'il faut au bon endroit dans les journaux.
         """,
-    "depends" : ["account", "l10n_fr"],
+    "depends" : ["account"],
     "init_xml" : [],
     "update_xml" : ['views/category.xml', 'views/model.xml', 'wizards/create.xml', 'wizards/import_export.xml',
                     'views/menus.xml', 'views/company.xml', 'data/journals.xml'],
