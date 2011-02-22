@@ -106,6 +106,37 @@ _menu_groups : None
 from openerp.pooler import get_pool
 from openerp.osv import fields
 
+def get_id_from_xmlid(cursor, user_id, xmlid):
+
+    """
+    Returns the ID associated to an XMLID.
+    """
+
+    data_pool = get_pool(cursor.dbname).get('ir.model.data')
+    id_splitted = xmlid.split('.')
+
+    try:
+        module = id_splitted[0]
+        id = id_splitted[1]
+    except IndexError:
+        module = None
+        id = xmlid
+
+    if module:
+        search = [('name', '=', id), ('module', '=', module)]
+    else:
+        search = [('name', '=', xmlid)]
+
+    try:
+        data_id = data_pool.search(cursor, user_id, search)[0]
+    except IndexError:
+        raise Exception('Unable to find an object corresponding to XMLID "%s."' % xmlid)
+
+    object_id = data_pool.read(cursor, user_id, data_id)['res_id']
+
+    return object_id
+
+
 class Menu(object):
 
     """
@@ -136,14 +167,7 @@ class Menu(object):
         """
 
         if isinstance(id, basestring):
-            # Argument considered as an XMLID, we look into
-            # ir.model.mata to get the DB ID associated to this xmlid.
-            data_pool = get_pool(cursor.dbname).get('ir.model.data')
-            data_id = data_pool.search(cursor, user_id, [('name', '=', id),])
-            if not data_id:
-                raise Exception(u'Menu with XMLID %s does not exist.' % id)
-            data_id = data_id[0]
-            menu_id = data_pool.read(cursor, user_id, data_id)['res_id']
+            menu_id = get_id_from_xmlid(cursor, user_id, id)
         elif isinstance(id, (int, long)):
             # Argument is already the menu DB ID
             menu_id = id
@@ -257,6 +281,22 @@ class Menu(object):
 
         pool.write(cursor, user_id, self.id, data)
 
+    def set_allowed_groups(self, cursor, user_id, groups):
+
+        """
+        Defines groups allowed to see with this menu.
+        """
+
+        pool = get_pool(cursor.dbname)
+        data_pool = pool.get('ir.model.data')
+        menu_pool = pool.get('ir.ui.menu')
+
+        groups_ids = [get_id_from_xmlid(cursor, user_id, xmlid) for xmlid in groups]
+
+        menu_pool.write(cursor, user_id, self.id, {
+            'groups_id' : [(6, 0, groups_ids)]
+        })
+
     def delete(self, cursor, user_id):
 
         """
@@ -358,6 +398,10 @@ class AttachMenu(object):
                                config['help'],
                                config['domain'])
 
+        # We define which groups can see this menu
+        if config['groups']:
+            menu.set_allowed_groups(cursor, user_id, config['groups'])
+
         return object_id
 
     def unlink(self, cursor, user_id, ids, context=None):
@@ -390,6 +434,8 @@ class AttachMenu(object):
         # name of the object changed, and change the menu parent if needed.
         #
 
+        # TODO: This part need improvements
+        old_objects_names = [o.name for o in self.browse(cursor, user_id, ids, context=context)]
         result = super(AttachMenu, self).write(cursor, user_id, ids, values, context)
         
         try:
@@ -399,20 +445,23 @@ class AttachMenu(object):
 
         objects = self.browse(cursor, user_id, ids, context=context)
 
-        for object in objects:
+        for index, object in enumerate(objects):
 
             # Note: The config values returned are based on the new values
-            # because we saved the object with super().
+            # because we saved the object with super(). Use old_objects to access old values.
             config = self.get_config_values(cursor, user_id, object, context)
             name_field = config['name']
             
             menu = Menu.get_from_id(cursor, user_id, object.menu_id.id)
             to_update = {}
 
+            # TODO: Other fields may need update, like groups, etc
             if name_field in values:
-                unicode_name = values[name_field].decode('utf-8')
-                if (getattr(object, name_field) != unicode_name) and object.menu_id.id:
-                    to_update['name'] = unicode_name
+                new_name = values[name_field]
+                old_name = old_objects_names[index]
+
+                if (old_name != new_name) and object.menu_id.id:
+                    to_update['name'] = new_name
             
             if config['parent'] != menu.parent.id:
                 to_update['parent'] = Menu.get_from_id(cursor, user_id, config['parent'])

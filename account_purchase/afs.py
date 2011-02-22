@@ -101,6 +101,7 @@ class Model(AttachMenu, osv.osv):
     _menu_view_mode = 'form'
     _menu_context = _get_menu_context
     _menu_target = 'new'
+    _menu_groups = ['account.group_account_user', 'account.group_account_manager']
     
     _name = "afs.model"
     _defaults = {'save_price' : False, 'tva_position' : 'd', 'ttc_position' : 'c', 'ht_position' : 'd'}
@@ -207,6 +208,7 @@ class ModelCategory(AttachMenu, osv.osv):
     # Configure menu auto-generation
     _menu_name = 'name'
     _menu_parent = _get_parent_menu_id
+    _menu_groups = ['account.group_account_user', 'account.group_account_manager']
     
     _name = "afs.model.category"
     _order = "sequence,id"

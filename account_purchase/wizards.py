@@ -198,7 +198,6 @@ class CreateEntryWizard(osv.osv_memory):
         model = self.pool.get('afs.model').read(cursor, user_id, context['model'])
         return model['save_price']
 
-    @cache(5)
     def _get_payments_mode(self, cursor, user_id, context=None):
 
         """
@@ -298,8 +297,12 @@ class ImportExportWizard(osv.osv_memory):
 
         fake_file = StringIO.StringIO(file_data)
 
-        convert_xml_import(cursor, 'account_purchase', fake_file, mode='update', noupdate=True)
-        
+        convert_xml_import(cursor, 'account_purchase', fake_file, mode='init', noupdate=True)
+
+        return {
+            'type': 'ir.actions.act_window_close',
+        }
+
     def get_export_file(self, cursor, user_id, context=None):
 
         """
