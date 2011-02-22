@@ -25,7 +25,7 @@ from openerp.tools.misc import cache
 from openerp.tools.translate import _
 from openerp.tools.convert import convert_xml_import
 
-from . afs import PAYMENTS_MODES
+from . afs import PAYMENTS_MODES, logger
 from . tools import get_poolers, search_and_read
 
 class CreateEntryWizard(osv.osv_memory):
@@ -175,8 +175,8 @@ class CreateEntryWizard(osv.osv_memory):
         try:
             return self._get_payments_mode(cursor, user_id, context)[0]
         except KeyError:
-            # May never happen, but we still check
-            return
+            if 'model' in context:
+                logger.warning('No payments modes defnined for this model: %d' % context['model'])
 
     def _check_amounts(self, cursor, user_id, ids, context=None):
 
@@ -206,6 +206,7 @@ class CreateEntryWizard(osv.osv_memory):
         """
 
         if 'model' not in context:
+            logger.warning('Wizard is opened whereas no model is defined in the context!')
             return
 
         model = self.pool.get('afs.model').browse(cursor, user_id, context['model'], context=context)

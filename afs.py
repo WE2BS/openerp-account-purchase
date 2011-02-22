@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import logging
+
 from openerp.osv import osv, fields
 from openerp.tools.translate import _
 
@@ -48,6 +50,8 @@ JOURNALS = {
     'BQ' : 'banque',
     'OD' : 'divers',
 }
+
+logger = logging.getLogger('account_purchase')
 
 class Tax(osv.osv):
 
