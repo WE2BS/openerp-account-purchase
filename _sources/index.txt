@@ -9,7 +9,7 @@ Account Purchase Documentation
 Choose a language :
 
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
 
    Documentation en Français <fr/index>
 
