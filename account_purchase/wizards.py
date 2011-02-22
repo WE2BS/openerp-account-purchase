@@ -313,7 +313,7 @@ class ImportExportWizard(osv.osv_memory):
         """
 
         if context and 'export' not in context:
-            return
+            return ''
 
         pmodels, pcategory, pentry = get_poolers(cursor, 'afs.model', 'afs.model.category', 'afs.model.entry')
 

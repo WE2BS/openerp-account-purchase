@@ -24,6 +24,7 @@
                 <form string="Export">
                     <field name="file_name" invisible="1"/>
                     <field name="file" readonly="1" filename="file_name" nolabel="1"/>
+                    <button special="cancel" string="Close" icon="gtk-cancel"/>
                 </form>
             </field>
         </record>
