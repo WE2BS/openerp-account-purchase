@@ -103,8 +103,8 @@ _menu_groups : None
 
 """
 
-from openerp.pooler import get_pool
-from openerp.osv import fields
+from pooler import get_pool
+from osv import fields
 
 def get_id_from_xmlid(cursor, user_id, xmlid):
 

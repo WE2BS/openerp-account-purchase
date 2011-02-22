@@ -20,13 +20,12 @@ import datetime
 import base64
 import StringIO
 
-from openerp.osv import osv, fields
-from openerp.tools.misc import cache
-from openerp.tools.translate import _
-from openerp.tools.convert import convert_xml_import
+from osv import osv, fields
+from tools.translate import _
+from tools.convert import convert_xml_import
 
 from . afs import PAYMENTS_MODES, logger
-from . tools import get_poolers, search_and_read
+from . localtools import get_poolers, search_and_read
 
 class CreateEntryWizard(osv.osv_memory):
 

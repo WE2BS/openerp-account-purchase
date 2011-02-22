@@ -20,7 +20,7 @@ import base64
 import os
 import pickle
 
-from openerp import pooler
+import pooler
 
 def get_poolers(cursor, *args):
 
