@@ -175,13 +175,16 @@ class CreateEntryWizard(osv.osv_memory):
         try:
             return self._get_payments_mode(cursor, user_id, context)[0]
         except KeyError:
+            # May never happen, but we still check
             return
 
     def _check_amounts(self, cursor, user_id, ids, context=None):
 
         for record in self.browse(cursor, user_id, ids):
-            if record.amount_ht and record.amount_ht <= 0.0: return False
-            if record.amount_ht and record.amount_ht <= 0.0: return False
+
+            if not record.amount_ht > 0: return False
+            if not record.amount_ttc > 0: return False
+
         return True
 
     def _default_amount_ht(self, cursor, user_id, context=None):
@@ -205,42 +208,47 @@ class CreateEntryWizard(osv.osv_memory):
         if 'model' not in context:
             return
 
-        model = self.pool.get('afs.model').browse(cursor, user_id, context['model'])
+        model = self.pool.get('afs.model').browse(cursor, user_id, context['model'], context=context)
         modes = [a.payment_mode for a in model.ttc_accounts]
 
         return [(k, v) for k, v in PAYMENTS_MODES if k in modes]
 
     def on_amount_ht_changed(self, cursor, user_id, id, amount_ht, tax):
 
+        result = {
+            'amount_ttc' : amount_ht,
+            'amount_ht' : amount_ht
+        }
+
         if not tax:
-            result = {
-                'amount_ttc' : 0,
-                'amount_ht' : 0
-            }
-        else:
-            tax = self.pool.get('account.tax').browse(cursor, user_id, tax)
-            computed_prices = self.pool.get('account.tax').compute_all(cursor, user_id, [tax], amount_ht, 1)
-            result = {
-                'amount_ttc' : computed_prices['total_included'],
-                'amount_ht' : computed_prices['total']
-            }
+            return {'value' : result}
+        
+        accounttax = self.pool.get('account.tax')
+        tax = accounttax.browse(cursor, user_id, tax)
+        computed_prices = accounttax.compute_all(cursor, user_id, [tax], amount_ht, 1)
+
+        result = {
+            'amount_ttc' : computed_prices['total_included'],
+            'amount_ht' : computed_prices['total']
+        }
 
         return {'value': result}
 
     def on_amount_ttc_changed(self, cursor, user_id, id, amount_ttc, tax_id):
 
-        result = {}
-
-        if not tax_id:
-            return result
-
-        taxes = self.pool.get('account.tax').browse(cursor, user_id, [tax_id])
-        computed = self.pool.get('account.tax').compute_inv(cursor, user_id, taxes, amount_ttc, 1)[0]
-
         result = {
             'amount_ttc' : amount_ttc,
-            'amount_ht' : computed['price_unit']
+            'amount_ht' : amount_ttc
         }
+
+        if not tax_id:
+            return {'value' : result }
+
+        accounttax = self.pool.get('account.tax')
+        taxes = accounttax.browse(cursor, user_id, [tax_id])
+        computed = accounttax.compute_inv(cursor, user_id, taxes, amount_ttc, 1)[0]
+
+        result['amount_ht'] = computed['price_unit']
 
         return {'value': result}
 
