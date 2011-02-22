@@ -98,6 +98,9 @@ _menu_domain : None,
 _menu_target : 'current'
     Can be new or current.
 
+_menu_groups : None
+    List of groups allowed to show this menu: ['account.group_account_user', '...']
+
 """
 
 from openerp.pooler import get_pool
@@ -291,6 +294,7 @@ class AttachMenu(object):
             '_menu_help' : None,
             '_menu_domain' : None,
             '_menu_target' : 'current',
+            '_menu_groups' : None,
         }
 
         for variable in defaults:
@@ -406,8 +410,9 @@ class AttachMenu(object):
             to_update = {}
 
             if name_field in values:
-                if (getattr(object, name_field) != values[name_field]) and object.menu_id.id:
-                    to_update['name'] = values[name_field]
+                unicode_name = values[name_field].decode('utf-8')
+                if (getattr(object, name_field) != unicode_name) and object.menu_id.id:
+                    to_update['name'] = unicode_name
             
             if config['parent'] != menu.parent.id:
                 to_update['parent'] = Menu.get_from_id(cursor, user_id, config['parent'])
