@@ -21,7 +21,7 @@
                         <field name="amount_ht" on_change="on_amount_ht_changed(amount_ht, tax_id)" default_focus="1"/>
                         <field name="amount_ttc" on_change="on_amount_ttc_changed(amount_ttc, tax_id)" />
                         <field name="payment_mode" />
-                        <field name="save" />
+                        <field name="save" groups="account.group_account_manager"/>
                     </group>
                     <group col="2">
                         <button string="Cancel" icon="gtk-cancel" special="cancel"/>

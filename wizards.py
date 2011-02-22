@@ -125,9 +125,10 @@ class CreateEntryWizard(osv.osv_memory):
             'state' : 'draft',
         })
 
-        # Remember the price if checked
-        pmodel.write(cursor, user_id, context['model'],
-           {'save_price' : object['amount_ht'] if object['save'] else None})
+        # Remember the price if checked, only Accounting/Managers can do this.
+        if object['save']:
+            pmodel.write(cursor, user_id, context['model'],
+                {'save_price' : object['amount_ht']})
 
         return {
             'type': 'ir.actions.act_window_close',

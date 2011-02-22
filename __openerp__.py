@@ -35,7 +35,7 @@
         """,
     "depends" : ["account"],
     "init_xml" : [],
-    "update_xml" : ['data/groups.xml', 'views/category.xml', 'views/model.xml', 'wizards/create.xml',
+    "update_xml" : ['views/category.xml', 'views/model.xml', 'wizards/create.xml',
                     'wizards/import_export.xml', 'views/menus.xml', 'views/company.xml', 'data/journals.xml',
                     'security/ir.model.access.csv'],
     "demo_xml" : [],

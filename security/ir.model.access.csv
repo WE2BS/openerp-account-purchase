@@ -1,10 +1,7 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_afs_model_category","afs.model.category accountant","model_afs_model_category","account.group_account_user",1,1,1,1
-"access_afs_model_category","afs.model.category manager","model_afs_model_category","account.group_account_manager",1,1,1,1
-"access_afs_model_category","afs.model.category purchase","model_afs_model_category","group_account_purchase",1,0,0,0
-"access_afs_model","afs.model accountant","model_afs_model","account.group_account_user",1,1,1,1
-"access_afs_model","afs.model manager","model_afs_model","account.group_account_manager",1,1,1,1
-"access_afs_model","afs.model purchase","model_afs_model","group_account_purchase",1,0,0,0
-"access_afs_model_entry","afs.model.entry accountant","model_afs_model_entry","account.group_account_user",1,1,1,1
-"access_afs_model_entry","afs.model.entry manager","model_afs_model_entry","account.group_account_manager",1,1,1,1
-"access_afs_model_entry","afs.model.entry purchase","model_afs_model_entry","group_account_purchase",1,0,0,0
+"access_afs_model_category_accountant","afs.model.category accountant","model_afs_model_category","account.group_account_user",1,0,0,0
+"access_afs_model_category_manager","afs.model.category manager","model_afs_model_category","account.group_account_manager",1,1,1,1
+"access_afs_model_accountant","afs.model accountant","model_afs_model","account.group_account_user",1,0,0,0
+"access_afs_model_manager","afs.model manager","model_afs_model","account.group_account_manager",1,1,1,1
+"access_afs_model_entry_accountant","afs.model.entry accountant","model_afs_model_entry","account.group_account_user",1,0,0,0
+"access_afs_model_entry_manager","afs.model.entry manager","model_afs_model_entry","account.group_account_manager",1,1,1,1
