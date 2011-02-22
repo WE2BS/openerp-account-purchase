@@ -28,9 +28,12 @@ class Company(osv.osv):
     _inherit = 'res.company'
     _name = 'res.company'
     _columns = {
-        'afs_vat' : fields.boolean(_('This company is subject to VAT.'),
-            help=_('Check this if you company is subject to VAT. This is used by the Account '
-                   'FR Simplified module to handle journal entries.'))
+        'afs_vat' : fields.boolean(_('Apply the tax in account_purchase'),
+            help=_("Uncheck this if your company don't pay tax on purchase. For example, it's the in France "
+                   "if you are not subjected to VAT, like some associations."))
+    }
+    _defaults = {
+        'afs_vat' : True,
     }
 
 Company()

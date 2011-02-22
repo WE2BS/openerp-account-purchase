@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_fr_simplified
+#	* account_purchase
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1-dev\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-02-21 14:31+0000\n"
-"PO-Revision-Date: 2011-02-21 14:31+0000\n"
+"POT-Creation-Date: 2011-02-22 13:51+0000\n"
+"PO-Revision-Date: 2011-02-22 13:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,72 +15,79 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:105
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:109
 #: view:afs.model:0
 #: field:afs.model,category_id:0
 #: view:afs.model.category:0
 #, python-format
 msgid "Category"
-msgstr "Catégorie"
+msgstr "Categorie"
 
-#. module: account_fr_simplified
-#: model:ir.module.module,shortdesc:account_fr_simplified.module_meta_information
+#. module: account_purchase
+#: model:ir.module.module,shortdesc:account_purchase.module_meta_information
 msgid "Accouting purchase management"
-msgstr "Accouting purchase management"
+msgstr "Comptabilité: Gestion des achats"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.create:0
 msgid "Amounts"
 msgstr "Montants"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_wizard_create
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_afs_wizard_create
 msgid "afs.wizard.create"
 msgstr "afs.wizard.create"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: constraint:res.company:0
 msgid "Error! You can not create recursive companies."
 msgstr "Erreur ! Vous ne pouvez pas créer de sociétés récursives"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.import_export:0
 msgid "Select a file and click on 'Import':"
 msgstr "Selectionnez un fichier et cliquez sur 'Importer':"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:214
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:218
 #: field:afs.model.category,child_ids:0
 #, python-format
 msgid "Child Categories"
-msgstr "Sous-categories"
+msgstr "Catégories enfants"
 
-#. module: account_fr_simplified
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:263
+#: field:afs.wizard.create,period:0
+#, python-format
+msgid "Period"
+msgstr "Period"
+
+#. module: account_purchase
 #: view:afs.wizard.create:0
 msgid "Add journal entry"
 msgstr "Ajouter aux journaux"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:33
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:35
 #, python-format
 msgid "Excl. Tax"
 msgstr "HT"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_model_category
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_afs_model_category
 msgid "afs.model.category"
 msgstr "afs.model.category"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:257
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:267
 #: field:afs.wizard.create,amount_ttc:0
 #, python-format
 msgid "Amount taxed"
 msgstr "Montant TTC"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:38
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:40
 #: selection:afs.model,ht_position:0
 #: selection:afs.model,ttc_position:0
 #: selection:afs.model,tva_position:0
@@ -88,16 +95,16 @@ msgstr "Montant TTC"
 msgid "Debit"
 msgstr "Débit"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.import_export:0
 #: selection:afs.wizard.import_export,state:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_import_action
-#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_import
+#: model:ir.actions.act_window,name:account_purchase.afs_import_action
+#: model:ir.ui.menu,name:account_purchase.menu_afs_import
 msgid "Import"
 msgstr "Importer"
 
-#. module: account_fr_simplified
-#: model:ir.module.module,description:account_fr_simplified.module_meta_information
+#. module: account_purchase
+#: model:ir.module.module,description:account_purchase.module_meta_information
 msgid "\n"
 "        This module let you easily create journal entries for simple purchases like internet or phone without\n"
 "        using the purchase module. Read the documentation for more informarion.\n"
@@ -109,79 +116,80 @@ msgid "\n"
 "        other coutries too. Please report issues on the github page.\n"
 "        "
 msgstr "\n"
-"        Ce module vous permet de créer facilement les écritures comptables de vos achats comme internet ou le téléphone\n"
-"        sans utiliser le module purchase. Consultez la documentation pour plus d'informations.\n"
+"        This module let you easily create journal entries for simple purchases like internet or phone without\n"
+"        using the purchase module. Read the documentation for more informarion.\n"
 "\n"
-"        Site web: http://github.com/thibautd/openerp-account_purchase/\n"
-"        Documentation:\n"
+"        Module's homepage: http://github.com/thibautd/openerp-account_purchase/\n"
+"        Module's documentation:\n"
 "\n"
-"        Note: Ce module a été créé pour la comptabilité française.\n"
+"        Please note that this module has been created for french accounting, but it might work for\n"
+"        other coutries too. Please report issues on the github page.\n"
 "        "
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:108
-#: code:addons/account_fr_simplified/wizards.py:254
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:112
+#: code:addons/account_purchase/wizards.py:264
 #: field:afs.model,ref:0
 #: field:afs.wizard.create,ref:0
 #, python-format
 msgid "REF"
 msgstr "REF"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:110
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:114
 #: field:afs.model,ht_position:0
 #, python-format
 msgid "Untaxed amount position"
 msgstr "Position HT"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model:0
 msgid "Search Models"
 msgstr "Rechercher dans les modèles"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model:0
 msgid "Excl. Taxes"
 msgstr "HT"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_wizard_import_export
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_afs_wizard_import_export
 msgid "afs.wizard.import_export"
 msgstr "afs.wizard.import_export"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:213
-#: code:addons/account_fr_simplified/menu.py:62
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:217
+#: code:addons/account_purchase/menu.py:62
 #: field:afs.model.category,parent_id:0
 #, python-format
 msgid "Parent"
 msgstr "Parent"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:215
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:219
 #: view:afs.model:0
 #: field:afs.model.category,model_ids:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_models_action
-#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_tree_category
+#: model:ir.actions.act_window,name:account_purchase.afs_models_action
+#: model:ir.ui.menu,name:account_purchase.menu_afs_tree_category
 #, python-format
 msgid "Models"
 msgstr "Modèles"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:260
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:270
 #: field:afs.wizard.create,save:0
 #, python-format
 msgid "Remember the price"
 msgstr "Se souvenir du prix"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:226
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:230
 #: field:afs.model.entry,journal:0
 #, python-format
 msgid "Journal"
 msgstr "Journal"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: field:afs.model,menu_id:0
 #: field:afs.model,save_price:0
 #: field:afs.model.category,menu_id:0
@@ -189,77 +197,70 @@ msgstr "Journal"
 msgid "unknown"
 msgstr "unknown"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: constraint:afs.wizard.create:0
 msgid "Amounts must be superior to 0."
 msgstr "Les montants doivent être superieurs à 0."
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/company.py:31
-#: field:res.company,afs_vat:0
-#, python-format
-msgid "This company is subject to VAT."
-msgstr "Cette société est assujettie à la TVA."
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:28
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:30
 #: selection:afs.model.entry,payment_mode:0
 #, python-format
 msgid "Instrument of trade"
 msgstr "Effet de commerce"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:34
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:36
 #: view:afs.model:0
 #, python-format
 msgid "VAT"
 msgstr "TVA"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:252
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:262
 #: field:afs.wizard.create,date:0
 #, python-format
 msgid "Date"
 msgstr "Date"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:114
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:118
 #: field:afs.model,tva_account:0
 #, python-format
 msgid "Tax account"
 msgstr "Compte de taxe"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model.category:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_categories_action
-#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_create_category
+#: model:ir.actions.act_window,name:account_purchase.afs_categories_action
+#: model:ir.ui.menu,name:account_purchase.menu_afs_create_category
 msgid "Categories"
-msgstr "Categories"
+msgstr "Catégories"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_account_tax
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_account_tax
 msgid "account.tax"
 msgstr "account.tax"
 
-#. module: account_fr_simplified
-#: model:ir.ui.menu,name:account_fr_simplified.afs_menu
-#: model:ir.ui.menu,name:account_fr_simplified.afs_menu_config
+#. module: account_purchase
+#: model:ir.ui.menu,name:account_purchase.afs_menu
+#: model:ir.ui.menu,name:account_purchase.afs_menu_config
 msgid "Purchase"
 msgstr "Achats"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:27
-#: code:addons/account_fr_simplified/afs.py:225
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:29
+#: code:addons/account_purchase/afs.py:229
 #: field:afs.model.entry,account_id:0
 #: selection:afs.model.entry,payment_mode:0
 #, python-format
 msgid "Account"
 msgstr "Compte"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:104
-#: code:addons/account_fr_simplified/afs.py:211
-#: code:addons/account_fr_simplified/menu.py:61
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:108
+#: code:addons/account_purchase/afs.py:215
+#: code:addons/account_purchase/menu.py:61
 #: field:afs.model,name:0
 #: field:afs.model.category,complete_name:0
 #: field:afs.model.category,name:0
@@ -267,32 +268,32 @@ msgstr "Compte"
 msgid "Name"
 msgstr "Nom"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_model_entry
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_afs_model_entry
 msgid "afs.model.entry"
 msgstr "afs.model.entry"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:357
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:367
 #: field:afs.wizard.import_export,file_name:0
 #, python-format
 msgid "File name"
 msgstr "Nom du fichier"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_res_company
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_res_company
 msgid "Companies"
 msgstr "Sociétés"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:25
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:27
 #: selection:afs.model.entry,payment_mode:0
 #, python-format
 msgid "Cash"
 msgstr "Liquide"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:39
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:41
 #: selection:afs.model,ht_position:0
 #: selection:afs.model,ttc_position:0
 #: selection:afs.model,tva_position:0
@@ -300,145 +301,145 @@ msgstr "Liquide"
 msgid "Credit"
 msgstr "Crédit"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:115
+#. module: account_purchase
+#: code:addons/account_purchase/company.py:32
+#: help:res.company,afs_vat:0
+#, python-format
+msgid "Uncheck this if your company don't pay tax on purchase. For example, it's the in France if you are not subjected to VAT, like some associations."
+msgstr "Décochez cette case si votre société ne paie pas de taxe à l'achat. Par exemple, c'est le cas en France si vous n'êtes pas assujettis à la TVA."
+
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:119
 #: field:afs.model,ttc_accounts:0
 #, python-format
 msgid "Taxed amount accounts"
-msgstr "Compte TTC"
+msgstr "Comptes TTC"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:224
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:228
 #: view:afs.model:0
 #: field:afs.model.entry,model_id:0
 #, python-format
 msgid "Model"
 msgstr "Modèle"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.create:0
 msgid "Add to journal"
 msgstr "Ajouter aux journaux"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:113
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:117
 #: field:afs.model,ht_account:0
 #, python-format
 msgid "Untaxed Account"
 msgstr "Compte HT"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model:0
 msgid "Incl. Taxes"
 msgstr "TTC"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:111
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:115
 #: field:afs.model,tva_position:0
 #, python-format
 msgid "Tax position"
 msgstr "Position taxe"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/company.py:32
-#: help:res.company,afs_vat:0
-#, python-format
-msgid "Check this if you company is subject to VAT. This is used by the Account FR Simplified module to handle journal entries."
-msgstr "Cochez cette case si votre société est assujettie à la TVA."
-
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:32
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:34
 #, python-format
 msgid "Incl. Tax"
 msgstr "TTC"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:26
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:28
 #: selection:afs.model.entry,payment_mode:0
 #, python-format
 msgid "Bank"
 msgstr "Banque"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model.entry:0
 msgid "Accounts and journals per payment mode"
 msgstr "Comptes et journaux par mode de paiement"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.model:0
 msgid "Group By..."
 msgstr "Grouper Par..."
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: field:afs.model.category,sequence:0
 msgid "Sequence"
 msgstr "Sequence"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:107
-#: code:addons/account_fr_simplified/wizards.py:258
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:111
+#: code:addons/account_purchase/wizards.py:268
 #: field:afs.model,tax_id:0
 #: field:afs.wizard.create,tax_id:0
 #, python-format
 msgid "Tax"
 msgstr "Taxe"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:253
-#: field:afs.wizard.create,period:0
+#. module: account_purchase
+#: code:addons/account_purchase/company.py:31
+#: field:res.company,afs_vat:0
 #, python-format
-msgid "Period"
-msgstr "Periode"
+msgid "Apply the tax in account_purchase"
+msgstr "Appliquez la taxe dans les achats fais avec account_purchase"
 
-#. module: account_fr_simplified
-#: model:ir.model,name:account_fr_simplified.model_afs_model
+#. module: account_purchase
+#: model:ir.model,name:account_purchase.model_afs_model
 msgid "afs.model"
 msgstr "afs.model"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.create:0
 msgid "Header"
 msgstr "En-tête"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.import_export:0
 #: selection:afs.wizard.import_export,state:0
-#: model:ir.actions.act_window,name:account_fr_simplified.afs_export_action
-#: model:ir.ui.menu,name:account_fr_simplified.menu_afs_export
+#: model:ir.actions.act_window,name:account_purchase.afs_export_action
+#: model:ir.ui.menu,name:account_purchase.menu_afs_export
 msgid "Export"
 msgstr "Exporter"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:256
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:266
 #: field:afs.wizard.create,amount_ht:0
 #, python-format
 msgid "Amount untaxed"
-msgstr "Montant HT"
+msgstr "Montant TTC"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/wizards.py:356
+#. module: account_purchase
+#: code:addons/account_purchase/wizards.py:366
 #: field:afs.wizard.import_export,file:0
 #, python-format
 msgid "File"
 msgstr "Fichier"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:227
-#: code:addons/account_fr_simplified/wizards.py:259
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:231
+#: code:addons/account_purchase/wizards.py:269
 #: field:afs.model.entry,payment_mode:0
 #: field:afs.wizard.create,payment_mode:0
 #, python-format
 msgid "Payment mode"
 msgstr "Mode de paiement"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: view:afs.wizard.create:0
 msgid "Cancel"
 msgstr "Annuler"
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:106
-#: code:addons/account_fr_simplified/wizards.py:255
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:110
+#: code:addons/account_purchase/wizards.py:265
 #: view:afs.model:0
 #: field:afs.model,partner_id:0
 #: field:afs.wizard.create,partner:0
@@ -446,13 +447,13 @@ msgstr "Annuler"
 msgid "Partner"
 msgstr "Partenaire"
 
-#. module: account_fr_simplified
+#. module: account_purchase
 #: help:afs.model.category,sequence:0
 msgid "Represents the weight of the item in the menu. Bigger number means menu will be at bottom."
 msgstr "Represents the weight of the item in the menu. Bigger number means menu will be at bottom."
 
-#. module: account_fr_simplified
-#: code:addons/account_fr_simplified/afs.py:112
+#. module: account_purchase
+#: code:addons/account_purchase/afs.py:116
 #: field:afs.model,ttc_position:0
 #, python-format
 msgid "Taxed amount position"

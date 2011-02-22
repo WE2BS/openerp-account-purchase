@@ -33,7 +33,7 @@
         Please note that this module has been created for french accounting, but it might work for
         other coutries too. Please report issues on the github page.
         """,
-    "depends" : ["account"],
+    "depends" : ["account", "account_accountant"],
     "init_xml" : [],
     "update_xml" : ['views/category.xml', 'views/model.xml', 'wizards/create.xml',
                     'wizards/import_export.xml', 'views/menus.xml', 'views/company.xml', 'data/journals.xml',

@@ -46,10 +46,11 @@
                   groups="account.group_account_user,account.group_account_manager"/>
         <menuitem action="afs_models_action" id="menu_afs_tree_category" parent="afs_menu"
                   groups="account.group_account_user,account.group_account_manager"/>
-        <menuitem id="afs_menu_config" name="Purchase" parent="account.menu_finance_configuration"/>
+        <menuitem id="afs_menu_config" name="Purchase" parent="account.menu_finance_configuration"
+                  groups="account.group_account_manager"/>
         <menuitem action="afs_import_action" id="menu_afs_import"
-                  groups="base.group_extended,account.group_account_manager" parent="afs_menu_config"/>
+                  groups="base.group_extended" parent="afs_menu_config"/>
         <menuitem action="afs_export_action" id="menu_afs_export"
-                  groups="base.group_extended,account.group_account_manager" parent="afs_menu_config"/>
+                  groups="base.group_extended" parent="afs_menu_config"/>
     </data>
 </openerp>
