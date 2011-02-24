@@ -13,10 +13,4 @@ Choose a language :
 
    Documentation en Français <fr/index>
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
