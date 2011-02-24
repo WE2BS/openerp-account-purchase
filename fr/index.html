@@ -49,28 +49,55 @@
         
   <div class="section" id="account-purchase-documentation">
 <h1>Account Purchase - Documentation<a class="headerlink" href="#account-purchase-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Le module Account Purchase pour OpenERP 6.0.2 vous permet gérer plus facilement votre comptabilité concernant les
+<p>Le module Account Purchase pour OpenERP 6 vous permet gérer plus facilement votre comptabilité concernant les
 achats qui ne passent pas forcément par le module purchase, comme par exemple des timbres, votre facture d&#8217;eau
 ou encore le loyer. Mais ce n&#8217;est absolument pas restreint à ces exemples.</p>
 <p>Le module est basé sur un système de modèles. Vous définissez un modèle, comme par exemple <em>Facture EDF</em>. Dans ce modèle
 seront définis les options concernant la comptabilité : les comptes, les journaux, la TVA, etc.</p>
 <p>Une fois votre modèle défini, un sous-menu sera automatiquement ajouté dans le menu <em>Comptabilité-&gt;Achats</em>. En cliquant
 sur ce menu (qui a le même nom que votre modèle), vous aurez accès à un wizard (une petite fenêtre) qui vous permettra
-de déclarer un achat très simplement. Les journaux seront correctement rempli, mais devront être validés à la main.</p>
+de déclarer un achat très simplement. Les journaux seront correctement rempli, mais devront être validés à la main par
+un comptable qui peut les vérifier.</p>
+<div class="section" id="credits">
+<h2>Crédits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
+<p>Ce module a été développé par UIDE/WE2BS, avec l&#8217;aide du conseil général des bouches du rhônes.</p>
+</div>
+<div class="section" id="index">
+<h2>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#systeme-requis">Système requis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#telechargement">Téléchargement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#permissions">Permissions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure.html">Configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="configure.html#assujetissement-a-la-tva">Assujetissement à la TVA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure.html#creation-des-modeles">Création des modèles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure.html#creation-des-modeles-categories">Création des modèles/catégories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure.html#description-des-champs">Description des champs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#nom">Nom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#partenaire">Partenaire</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#taxe">Taxe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#ref">REF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#categorie">Catégorie</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#compte-et-position-ht">Compte et Position HT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#compte-et-position-taxe">Compte et Position Taxe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html#comptes-journaux-et-position-ttc">Comptes, journaux et position TTC</a></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="use.html">Utilisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="use.html#declarer-un-achat">Déclarer un achat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#valider-les-ecritures">Valider les écritures</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 

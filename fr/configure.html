@@ -26,6 +26,7 @@
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="top" title="Account Purchase v0.2 documentation" href="../index.html" />
     <link rel="up" title="Account Purchase - Documentation" href="index.html" />
+    <link rel="next" title="Utilisation" href="use.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
   <body>
@@ -39,6 +40,8 @@
         «&#160;&#160;<a href="install.html">Installation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="use.html">Utilisation</a>&#160;&#160;»
         </p>
 
       </div>
@@ -47,23 +50,66 @@
         
   <div class="section" id="configuration">
 <h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<p>Avant de pouvoir utiliser le module, vous allez devoir le configurer :</p>
-<blockquote>
-<ul class="simple">
-<li>Définir si votre société est assujetie à la TVA</li>
-<li>Créer/Importer des modèles</li>
-</ul>
-</blockquote>
+<p>Avant de pouvoir utiliser le module, vous allez devoir le configurer.</p>
 <div class="section" id="assujetissement-a-la-tva">
 <h2>Assujetissement à la TVA<a class="headerlink" href="#assujetissement-a-la-tva" title="Permalink to this headline">¶</a></h2>
 <p>Il est possible que votre société ne soit pas assujetie à la TVA, c&#8217;est le cas des associations
 par exemple. Si c&#8217;est votre cas, vous devez décocher l&#8217;option dans les paramètres de votre société :</p>
 <img alt="../_images/config.png" src="../_images/config.png" />
-<p>Si vous désactivez cette option, le champ &#8220;Taxe&#8221; du modèle ne sera pas utilisé, bien qu&#8217;il soit affiché.</p>
+<p>Si vous désactivez cette option, le champ &#8220;Taxe&#8221; du modèle ne sera pas utilisé, bien qu&#8217;il soit affiché, et les montants
+TTC seront écrits dans les journaux.</p>
 </div>
-<div class="section" id="creation-des-modeles">
-<h2>Création des modèles<a class="headerlink" href="#creation-des-modeles" title="Permalink to this headline">¶</a></h2>
-<p>Vous devez ensuite créez vos modèles.</p>
+<div class="section" id="creation-des-modeles-categories">
+<h2>Création des modèles/catégories<a class="headerlink" href="#creation-des-modeles-categories" title="Permalink to this headline">¶</a></h2>
+<p>Vous devez ensuite créez vos modèles, pour cela, rendez-vous dans le menu <em>Comptabilité-&gt;Achats-&gt;Modèles</em>. Cliquez sur
+le bouton <em>Créer</em>. Vous arriverez alors sur un formulaire comme celui-ci :</p>
+<img alt="../_images/model.png" src="../_images/model.png" />
+<div class="section" id="description-des-champs">
+<h3>Description des champs<a class="headerlink" href="#description-des-champs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nom">
+<h4>Nom<a class="headerlink" href="#nom" title="Permalink to this headline">¶</a></h4>
+<p>Le nom du modèle. Il sera aussi utilisé dans le menu, donc évitez les nom trop longs.</p>
+</div>
+<div class="section" id="partenaire">
+<h4>Partenaire<a class="headerlink" href="#partenaire" title="Permalink to this headline">¶</a></h4>
+<p>Si vous spécifiez un partenaire, il sera associés aux écritures comptables générées. Ce champ est facultatif et sera
+souvent laissé vide.</p>
+</div>
+<div class="section" id="taxe">
+<h4>Taxe<a class="headerlink" href="#taxe" title="Permalink to this headline">¶</a></h4>
+<p>Définis la taxe qui permet de passer du montant HT au montant TTC. En France, c&#8217;est le taux de TVA. Déclarez cette taxe
+même si votre société n&#8217;est pas assujetie à la TVA , car l&#8217;application de celle-ci dépend de la configuration
+de votre société (voir ci-dessus). Cela permet d&#8217;utiliser les modèles dans tous les types de sociétés.</p>
+</div>
+<div class="section" id="ref">
+<h4>REF<a class="headerlink" href="#ref" title="Permalink to this headline">¶</a></h4>
+<p>Cette référence sera utilisée dans les journaux.</p>
+<p><strong>Astuce</strong>: Vous pouvez mettre un début de référence, comme <em>Facture EDF n°</em>, et compléter au moment de déclarer un paiement.</p>
+</div>
+<div class="section" id="categorie">
+<h4>Catégorie<a class="headerlink" href="#categorie" title="Permalink to this headline">¶</a></h4>
+<p>La catégorie de votre modèle, permet d&#8217;organiser ceux-ci dans les menus (voir l&#8217;image ci-dessus).</p>
+</div>
+<div class="section" id="compte-et-position-ht">
+<h4>Compte et Position HT<a class="headerlink" href="#compte-et-position-ht" title="Permalink to this headline">¶</a></h4>
+<p>Définis dans quel compte (et avec quelle position) sera placé le montant HT de l&#8217;achat. Cette souplesse vous permet
+de déclarer des avoirs.</p>
+</div>
+<div class="section" id="compte-et-position-taxe">
+<h4>Compte et Position Taxe<a class="headerlink" href="#compte-et-position-taxe" title="Permalink to this headline">¶</a></h4>
+<p>Définis dans quel compte (et avec quelle position) sera placé le montant HT de la taxe.</p>
+</div>
+<div class="section" id="comptes-journaux-et-position-ttc">
+<h4>Comptes, journaux et position TTC<a class="headerlink" href="#comptes-journaux-et-position-ttc" title="Permalink to this headline">¶</a></h4>
+<p>Le compte et le journal du montant TTC dépendra du moyen de paiement. Vous devez donc définir pour chaque moyen
+de paiement le compte et le journal associé (exemple dans l&#8217;images ci-dessus).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Vous ne pourrez utilisez que les moyens de paiement déclarés dans ce champ !</p>
+</div>
+<p>Une fois tous les champs remplis, enregistrez votre modèle et <strong>actualisez la page</strong>.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -75,6 +121,8 @@ par exemple. Si c&#8217;est votre cas, vous devez décocher l&#8217;option dans 
         «&#160;&#160;<a href="install.html">Installation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="use.html">Utilisation</a>&#160;&#160;»
         </p>
 
       </div>
