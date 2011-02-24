@@ -52,25 +52,50 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="systeme-requis">
 <h2>Système requis<a class="headerlink" href="#systeme-requis" title="Permalink to this headline">¶</a></h2>
-<p>Le module Account Purchase a été écrit pour la version 6.0.2 d&#8217;OpenERP. Il ne fonctionnera pas sur les versions
-anterieures dans l&#8217;état actuel. Le moddule <em>account</em> sera instalé automatiquement. Nous vous conseillons aussi
-d&#8217;installer le module <em>account_accountant</em> pour pouvoir valider les écritures comptables.</p>
+<p>Le module Account Purchase a été écrit pour la version 6.0 d&#8217;OpenERP. Le moddule <em>account</em> sera instalé automatiquement,
+ainsi que le module <em>account_accoutant</em> qui vous permettra de valider les écritures comptables.</p>
 </div>
 <div class="section" id="telechargement">
 <h2>Téléchargement<a class="headerlink" href="#telechargement" title="Permalink to this headline">¶</a></h2>
 <p>Le projet est hébergé sur github à l&#8217;adresse suivante : <a class="reference external" href="https://github.com/thibautd/openerp-account_purchase">https://github.com/thibautd/openerp-account_purchase</a> .
 Vous pouvez soit télécharger la toute dernière version, qui est une version de développement, soit télécharger
 les versions dites &#8220;taggées&#8221;, c&#8217;est à dire qui ont un numéro. Dans une environnement de production, nous vous
-recommandons d&#8217;installer une version taggée.</p>
+recommandons d&#8217;installer une version taggée, qui est un gage de stabilité.</p>
 <p>Pour cela, cliquez sur le bouton <em>Downloads</em> et cliquez sur le numéro de version le plus élevé. Ensuite, décompressez
-l&#8217;archive et renommez le dossier <em>account_purchase</em>.</p>
+l&#8217;arhive et récupérez le dossier account_purchase : il contient le module.</p>
 </div>
 <div class="section" id="id1">
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Copiez ensuite le dossier <em>account_purchase</em> dans votre dossier contenant les modules d&#8217;OpenERP. Vous pouvez aussi,
-si vous le souhaitez faire un lien symbolique si vous êtes sous Linux (option conseillée).</p>
+si vous le souhaitez faire un lien symbolique si vous êtes sous Linux (option conseillée). Normalement, vos modules
+se trouvent dans le dossier <em>addons/</em> de votre serveur.</p>
 <p>Connectez-vous sur OpenERP en administrateur, puis rafraichissez la liste des modules, vous devriez voir un
 nouveau module nommé <em>account_purchase</em>, validez son installation, puis cliquez sur <strong>Appliquez les mises à jour planifiées</strong>.</p>
+</div>
+<div class="section" id="permissions">
+<h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Le module utilise les mêmes groupes que le module account :</dt>
+<dd><ul class="first last simple">
+<li>Accounting / Accoutant</li>
+<li>Accounting / Manager</li>
+</ul>
+</dd>
+<dt>Permissions du groupe <em>Accounting / Accountant</em>:</dt>
+<dd><ul class="first last simple">
+<li>Utiliser/voir les modèles déjà définis</li>
+<li>Ecrire dans les journaux en utilisant les modèles</li>
+</ul>
+</dd>
+<dt>Permissions du groupe <em>Accounting / Manager</em>:</dt>
+<dd><ul class="first last simple">
+<li>Créer, modifier, supprimer des modèles et leurs catégories</li>
+<li>Sauvegarder le prix d&#8217;un modèle (le champ n&#8217;apparait pas pour l&#8217;autre groupe)</li>
+<li>Importer/Exporter les modèles/catégories (uniquement en vue Étendue)</li>
+</ul>
+</dd>
+</dl>
+<p>Pensez à attribuer les bons groupes à vos utilisateurs !</p>
 </div>
 </div>
 

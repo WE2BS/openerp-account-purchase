@@ -69,7 +69,7 @@ class CreateEntryWizard(osv.osv_memory):
             'narration' : '(Automatically created by AFS Module)',
         })
 
-        #2 - Add VAT if enabled
+        #2 - Add tax if enabled
         tva = object['amount_ttc'] - object['amount_ht']
         if tva != 0.00 and use_tva:
             pmoveline.create(cursor, user_id, {
@@ -99,7 +99,7 @@ class CreateEntryWizard(osv.osv_memory):
             'credit' : amount_ht if model['ht_position'] == 'c' else None,
             'account_id' : model['ht_account'][0],
             'move_id' : account_move,
-            'narration' : 'Automatically created by AFS Module.',
+            'narration' : 'Automatically created by account_purchase Module.',
             'ref' : object['ref'],
             'period_id' : object['period'],
             'journal_id' : journal_id,

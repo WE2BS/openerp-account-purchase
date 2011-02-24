@@ -43,13 +43,7 @@ POSITION = (
 
 ACCOUNTS_DOMAIN = [('type', '!=', 'view')]
 TAX_DOMAIN = [('type_tax_use', 'in', ('purchase', 'all'))]
-JOURNALS_DOMAIN = [('code', 'in', ('VT', 'BQ', 'HA', 'OD'))]
-JOURNALS = {
-    'VT' : 'ventes',
-    'HA' : 'achats',
-    'BQ' : 'banque',
-    'OD' : 'divers',
-}
+JOURNALS_DOMAIN = None
 
 logger = logging.getLogger('account_purchase')
 
