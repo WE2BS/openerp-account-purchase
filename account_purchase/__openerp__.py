@@ -28,7 +28,7 @@
         using the purchase module. Read the documentation for more informarion.
 
         Module's homepage: http://github.com/thibautd/openerp-account_purchase/
-        Module's documentation:
+        Module's documentation: http://thibautd.github.com/openerp-account_purchase/
 
         Please note that this module has been created for french accounting, but it might work for
         other coutries too. Please report issues on the github page.
