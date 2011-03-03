@@ -414,7 +414,7 @@ msgstr "Exporter"
 #: field:afs.wizard.create,amount_ht:0
 #, python-format
 msgid "Amount untaxed"
-msgstr "Montant TTC"
+msgstr "Montant HT"
 
 #. module: account_purchase
 #: code:addons/account_purchase/wizards.py:366
