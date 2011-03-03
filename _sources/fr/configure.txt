@@ -17,7 +17,7 @@ TTC seront écrits dans les journaux.
 Création des modèles/catégories
 -------------------------------
 
-Vous devez ensuite créez vos modèles, pour cela, rendez-vous dans le menu *Comptabilité->Achats->Modèles*. Cliquez sur
+Vous devez ensuite créer vos modèles, pour cela, rendez-vous dans le menu *Comptabilité->Achats->Modèles*. Cliquez sur
 le bouton *Créer*. Vous arriverez alors sur un formulaire comme celui-ci :
 
 .. image:: images/model.png
@@ -39,7 +39,7 @@ souvent laissé vide.
 Taxe
 ~~~~
 
-Définis la taxe qui permet de passer du montant HT au montant TTC. En France, c'est le taux de TVA. Déclarez cette taxe
+Définit la taxe qui permet de passer du montant HT au montant TTC. En France, c'est le taux de TVA. Déclarez cette taxe
 même si votre société n'est pas assujetie à la TVA , car l'application de celle-ci dépend de la configuration
 de votre société (voir ci-dessus). Cela permet d'utiliser les modèles dans tous les types de sociétés.
 
