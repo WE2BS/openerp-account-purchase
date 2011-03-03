@@ -10,7 +10,7 @@ ainsi que le module *account_accoutant* qui vous permettra de valider les écrit
 Téléchargement
 --------------
 
-Le projet est hébergé sur github à l'adresse suivante : https://github.com/thibautd/openerp-account_purchase .
+Le projet est hébergé sur github à l'adresse suivante : https://github.com/thibautd/openerp-account-purchase .
 Vous pouvez soit télécharger la toute dernière version, qui est une version de développement, soit télécharger
 les versions dites "taggées", c'est à dire qui ont un numéro. Dans une environnement de production, nous vous
 recommandons d'installer une version taggée, qui est un gage de stabilité.
