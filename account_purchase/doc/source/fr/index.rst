@@ -17,7 +17,20 @@ un comptable qui peut les vérifier.
 Crédits
 -------
 
-Ce module a été développé par UIDE/WE2BS, avec l'aide du conseil général des bouches du rhônes.
+Le module Account Purchase a été développé pour les besoin du monde associatif et en particulier pour
+l'association *Une Idée derrière l'Ecran*.
+
+L'association *Une Idée Derrière l'Ecran* a recu une subvention de fonctionnement du Conseil général
+des bouches du Rhône (CG13) pour le développement du module.
+
+Les participants à la création du modules sont :
+
+* `Association Une Idée Derrière l'Ecran`_ : Dévelopement du module
+* `SARL WE2BS`_ : Participation au éléments comptable du produit (aide au cahier des charges, gestion comptable,
+suivis du bon comportement du produit.).
+
+.. _Association Une Idée Derrière l'Ecran: http://www.idee-ecran.org
+.. _SARL WE2BS: http://www.we2bs.com
 
 Index
 -----

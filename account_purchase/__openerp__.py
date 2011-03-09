@@ -24,14 +24,22 @@
     "website" : "http://www.idee-ecran.org",
     "description" :
         """
-        This module let you easily create journal entries for simple purchases like internet or phone without
-        using the purchase module. Read the documentation for more informarion.
+        Le module Account Purchase a été développé pour les besoin du monde associatif et en particulier pour
+        l'association Une Idée derrière l'Ecran. Le module a pour objectif de simplifier la gestion des achats en proposant
+        la création de fiches de saisie simplifiées. Les fiches pourrons alors être classées par catégorie pour faciliter
+        leur accès (ex loyer, fourniture, …).
 
-        Module's homepage: http://github.com/thibautd/openerp-account_purchase/
-        Module's documentation: http://thibautd.github.com/openerp-account_purchase/
+        L'association Une Idée Derrière l'Ecran a recu une subvention de fonctionnement du Conseil général
+        des bouches du Rhône (CG13) pour le développement du module.
 
-        Please note that this module has been created for french accounting, but it might work for
-        other coutries too. Please report issues on the github page.
+        Les participants à la création du modules sont :
+
+        Association Une Idée Derrière l'Ecran : Dévelopement du module (http://www.idee-ecran.org)
+        SARL WE2BS : Participation au éléments comptable du produit (http://www.we2bs.com)
+                (aide au cahier des charges, gestion comptable, suivis du bon comportement du produit.)
+        
+        Site: http://github.com/thibautd/openerp-account-purchase/
+        Documentation: http://thibautd.github.com/openerp-account-purchase/
         """,
     "depends" : ["account", "account_accountant"],
     "init_xml" : [],

@@ -2,3 +2,17 @@ You can find the documentation of this module here :
     http://thibautd.github.com/openerp-account-purchase/
 
 Feel free to report any issue on github, or propose your improvements.
+
+Le module Account Purchase a été développé pour les besoin du monde associatif et en particulier pour
+l'association Une Idée derrière l'Ecran. Le module a pour objectif de simplifier la gestion des achats en proposant
+la création de fiches de saisie simplifiées. Les fiches pourrons alors être classées par catégorie pour faciliter
+leur accès (ex loyer, fourniture, …).
+
+L'association Une Idée Derrière l'Ecran a recu une subvention de fonctionnement du Conseil général
+des bouches du Rhône (CG13) pour le développement du module.
+
+Les participants à la création du modules sont :
+
+Association		Une Idée Derrière l'Ecran : Dévelopement du module (http://www.idee-ecran.org)
+SARL WE2BS : 	Participation au éléments comptable du produit (http://www.we2bs.com)
+                (aide au cahier des charges, gestion comptable, suivis du bon comportement du produit.)
