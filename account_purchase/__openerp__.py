@@ -21,13 +21,13 @@
     "version" : "0.1",
     "author" : "UIDE/WE2BS",
     "category": 'Generic Modules/Accounting',
-    "website" : "http://www.idee-ecran.org",
+    "website" : "http://www.idee-ecran.org - http://www.we2bs.com",
     "description" :
         """
         Le module Account Purchase a été développé pour les besoin du monde associatif et en particulier pour
-        l'association Une Idée derrière l'Ecran. Le module a pour objectif de simplifier la gestion des achats en proposant
-        la création de fiches de saisie simplifiées. Les fiches pourrons alors être classées par catégorie pour faciliter
-        leur accès (ex loyer, fourniture, …).
+        l'association Une Idée derrière l'Ecran. Le module a pour objectif de simplifier la gestion des achats
+        en proposant la création de fiches de saisie simplifiées. Les fiches pourrons alors être classées par
+        catégorie pour faciliter leur accès (ex loyer, fourniture, …).
 
         L'association Une Idée Derrière l'Ecran a recu une subvention de fonctionnement du Conseil général
         des bouches du Rhône (CG13) pour le développement du module.
@@ -39,7 +39,7 @@
                 (aide au cahier des charges, gestion comptable, suivis du bon comportement du produit.)
         
         Site: http://github.com/thibautd/openerp-account-purchase/
-        Documentation: http://thibautd.github.com/openerp-account-purchase/
+        Documentation: http://doc.we2bs.com/account-purchase/
         """,
     "depends" : ["account", "account_accountant"],
     "init_xml" : [],
